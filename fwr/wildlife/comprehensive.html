@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="mammalStyle.css">
+<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
+<title>Mammals</title>
+
+</head>
+
+<script type="text/javascript">
+
+var mammalList = new Array();
+var thisMammal;
+var checkCaps = false;
+var numRanges = 21;
+var provincialStatusEnabled = true;
+var rangeEnabled = true;
+
+// Make an array to associate each field with the div id and true/false whether to check it
+var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true]/*,[4,"provincialStatus",true]*/];
+
+function loadTasks() {
+	var rawMammals = initializeFiles("mammalListFull.csv");
+	mammalList = setMammalVars(rawMammals);
+	checkForCookies();
+	checkboxes();
+	setNewMammal();
+}
+
+// Read the mammals file
+function initializeFiles(fileLoc) {
+	var readFile = new Array();
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", fileLoc, false);
+	rawFile.onreadystatechange = function () {
+		if(rawFile.readyState == 4 && rawFile.status == 200) {
+			var allText = rawFile.responseText;
+			readFile = allText.split("\n");
+		}
+	}
+	rawFile.send(null);
+	return(readFile);
+}
+
+// Put the mammal list into an array of objects
+function setMammalVars(inputList) {
+	for (var i = 0; i < inputList.length; i++) {
+		var thisSpecies = inputList[i].split(",")
+		var newSpecies = {
+			commonName: thisSpecies[0],
+			spOrder: thisSpecies[1],
+			family: thisSpecies[2],
+			speciesEpithet: thisSpecies[3],
+			provincialStatus: thisSpecies[4],
+			images: thisSpecies[5],
+			range: thisSpecies[6],
+			count: 0,
+			gotRight: false
+		}
+		mammalList.push(newSpecies);
+	}
+	return(mammalList);
+}
+
+// Pick a random mammal
+function pickMammal(list) {
+	var newInt = Math.floor(Math.random() * list.length);
+	var newMammal = list[newInt];
+	return newMammal;
+}
+
+// Set up new mammal
+function setNewMammal() {
+	hideAnswers();
+	hideFeedbackImg();
+	if (mammalList.length > 0) {
+		thisMammal = pickMammal(mammalList);
+		document.getElementById("picture").innerHTML = "<img class='picImage' src='img/" + thisMammal.images + "' />";
+		// if Mammals, include suborder
+		if (thisMammal.spOrder == "Cetacea") {
+			document.getElementById("speciesEpithetLabel").innerHTML = "<b>Suborder</b>:";
+		} else {
+			document.getElementById("speciesEpithetLabel").innerHTML = "Species Epithet:";
+		}
+		// set ranges
+		if (thisMammal["range"] != "n/a") {
+			var newInt = Math.floor(Math.random() * 3);
+			document.getElementById("rangepic" + newInt).innerHTML = "<img class='rangeImg' src='img/range/" + thisMammal.range + "' />";
+			document.getElementById("range" + newInt).value = thisMammal.range;
+			for (i=0; i<3; i++) {
+				if (i != newInt) {
+					var rangeInt = thisMammal.range;
+					while (rangeInt == thisMammal.range) {
+						rangeInt = Math.floor(Math.random() * numRanges) + 1;
+					}
+					document.getElementById("rangepic" + i).innerHTML = "<img class='rangeImg' src='img/range/" + rangeInt + "'/>";
+					document.getElementById("range" + i).value = rangeInt;
+				}
+			}
+		}
+	} else {
+		document.getElementById("picture").innerHTML = "You finished the list, congratulations!! Refresh the page to start again... or go have a beer, you deserve it!";
+	}
+	
+	// if this mammal has nothing available to test, skip to next one
+	var testable = tidyInputs();
+	if (!testable && mammalList.length > 1) {
+		var ind = mammalList.indexOf(thisMammal);
+		mammalList.splice(ind,1);
+		setNewMammal();
+	}
+}
+
+// Check all answers
+function checkAnswers() {
+	var rightAnswers = 0;
+	var wrongAnswers = 0;
+	for (i=0; i<mammalDivNames.length; i++) {
+		if (mammalDivNames[i][2] && thisMammal[mammalDivNames[i][1]] != "n/a") {
+			var gotItRight = false;
+			gotItRight = checkAnswerParts(document.getElementById(mammalDivNames[i][1]).value, thisMammal[mammalDivNames[i][1]], mammalDivNames[i][1]+"Feedback");
+			if (gotItRight) {
+				rightAnswers++;
+			} else {
+				wrongAnswers++;
+			}
+		}
+	}
+	if (thisMammal["provincialStatus"] != "n/a" && provincialStatusEnabled == true) {
+		var gotItRight = false;
+		gotItRight = checkStatusCheckboxes();
+		if (gotItRight) {
+			rightAnswers++;
+		} else {
+			wrongAnswers++;
+		}
+	}
+	
+	if (thisMammal["range"] != "n/a" && rangeEnabled == true) {
+		var gotItRight = false;
+		gotItRight = checkRangeCheckboxes();
+		if (gotItRight) {
+			rightAnswers++;
+		} else {
+			wrongAnswers++;
+		}
+	}
+	
+	// If all the answers are right, take the animal of the list of study animals for this round
+	if (rightAnswers > 0 && wrongAnswers == 0) {
+		var ind = mammalList.indexOf(thisMammal);
+		mammalList.splice(ind,1);
+		document.getElementById("newMammal").focus();
+	}
+}
+
+// Compare each part of the answer
+function checkAnswerParts(localEntered, localActual, spanName) {
+	if (!checkCaps) {
+		localEntered = localEntered.toLowerCase();
+		localActual = localActual.toLowerCase();
+	}
+	localEntered = localEntered.replace("’","'");
+	localActual = localActual.replace("’","'");
+	
+	if (localEntered == localActual) {
+		document.getElementById(spanName).innerHTML = "<img class='answerImg' src='img/yes.jpg' />";
+		return true;
+	} else {
+		document.getElementById(spanName).innerHTML = "<img class='answerImg' src='img/no.jpg' />";
+		return false;
+	}
+}
+
+// See if checkbox type answers were right
+function checkStatusCheckboxes() {
+	var tempStatus = "";
+	for (i=0; i<3; i++) {
+		var checkbox = document.getElementById("provincialCheckbox"+[i+1]);
+		if (checkbox.checked == true) {
+			tempStatus = tempStatus + checkbox.value;
+		}
+	}
+	
+	if (thisMammal["provincialStatus"] == tempStatus) {
+		document.getElementById("provincialStatusFeedback").innerHTML = "<img class='answerImg' src='img/yes.jpg' />";
+		return true;
+	} else {
+		document.getElementById("provincialStatusFeedback").innerHTML = "<img class='answerImg' src='img/no.jpg' />";
+		return false;
+	}
+}
+
+// See if range answers were right
+function checkRangeCheckboxes() {
+
+	var radios = document.getElementsByName('range');
+	var selectedRange;
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i].type === 'radio' && radios[i].checked) {
+			// get value, set checked flag or do whatever you need to
+			selectedRange = radios[i].value;       
+		}
+	}
+	
+	if (thisMammal["range"] == selectedRange) {
+		document.getElementById("rangeFeedback").innerHTML = "<img class='answerImg' src='img/yes.jpg' />";
+		return true;
+	} else {
+		document.getElementById("rangeFeedback").innerHTML = "<img class='answerImg' src='img/no.jpg' />";
+		return false;
+	}
+}
+
+// Show answers
+function showAnswers() {
+	for (i=0; i<mammalDivNames.length; i++) {
+		document.getElementById(mammalDivNames[i][1]).value = thisMammal[mammalDivNames[i][1]];
+	}
+	if (thisMammal["provincialStatus"].includes("yellow")) {
+		document.getElementById("provincialCheckbox1").checked = true;
+	} else {
+		document.getElementById("provincialCheckbox1").checked = false;
+	}
+	if (thisMammal["provincialStatus"].includes("blue")) {
+		document.getElementById("provincialCheckbox2").checked = true;
+	} else {
+		document.getElementById("provincialCheckbox2").checked = false;
+	}
+	if (thisMammal["provincialStatus"].includes("red")) {
+		document.getElementById("provincialCheckbox3").checked = true;
+	} else {
+		document.getElementById("provincialCheckbox3").checked = false;
+	}
+	var radios = document.getElementsByName('range');
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i].value == thisMammal["range"]) {
+			radios[i].checked = true;
+		}
+	}
+}
+
+// Hide answers
+function hideAnswers() {
+	for (i=0; i<mammalDivNames.length; i++) {
+		document.getElementById(mammalDivNames[i][1]).value = "";
+	}
+	for (i=0; i<3; i++) {
+		document.getElementById("provincialCheckbox"+[i+1]).checked = false;
+	}
+	var radios = document.getElementsByName('range');
+	for (var i = 0; i < radios.length; i++) {
+		radios[i].checked = false;
+	}
+}
+
+// Hide answer feedback image
+function hideFeedbackImg() {
+	for (i=0; i<mammalDivNames.length; i++) {
+		document.getElementById(mammalDivNames[i][1] + "Feedback").innerHTML = "";
+	}
+	document.getElementById("provincialStatusFeedback").innerHTML = "";
+	document.getElementById("rangeFeedback").innerHTML = "";
+}
+
+// Show options menu
+function showOptions() {
+    document.getElementById("optionsBox").style.display = "block";
+}
+
+// Show options menu
+function hideOptions() {
+    document.getElementById("optionsBox").style.display = "none";
+	tidyInputs();
+	setCookies();
+}
+
+// Handle checkboxes in options and update boolean values to match
+function checkboxes() {
+	var checkBox = document.getElementById("capitalization");
+	if (checkBox.checked == true){
+		checkCaps = true;
+	} else {
+		checkCaps = false;
+	}
+	
+	for (i=0; i<mammalDivNames.length; i++) {
+		var checkBox2 = document.getElementById(mammalDivNames[i][1]+"Checkbox");
+		if (checkBox2.checked == true) {
+			mammalDivNames[i][2] = true;
+		} else {
+			mammalDivNames[i][2] = false;
+		}
+	}
+	
+	if (document.getElementById("provincialStatusCheckbox").checked == true) {
+		provincialStatusEnabled = true;
+	} else {
+		provincialStatusEnabled = false;
+	}
+	if (document.getElementById("rangeCheckbox").checked == true) {
+		rangeEnabled = true;
+	} else {
+		rangeEnabled = false;
+	}
+}
+
+// Show or hide input boxes based on user preference
+function tidyInputs() {
+	// if everything is disabled for this mammal, somethingShowing remains false
+	var somethingShowing = false;
+	
+	for (i=0; i<mammalDivNames.length; i++) {
+		if (thisMammal[mammalDivNames[i][1]] == "n/a") {
+			document.getElementById(mammalDivNames[i][1] + "Answer").innerHTML = "n/a";
+			document.getElementById(mammalDivNames[i][1] + "Answer").style.display = "inline-block";
+			document.getElementById(mammalDivNames[i][1]).style.display = "none";
+		} else {
+			if (mammalDivNames[i][2] == true) {
+				somethingShowing = true;
+				document.getElementById(mammalDivNames[i][1] + "Answer").style.display = "none";
+				document.getElementById(mammalDivNames[i][1]).style.display = "inline-block";
+			} else {
+				/*document.getElementById(mammalDivNames[i][1] + "Answer").innerHTML = thisMammal[mammalDivNames[i][1]];*/
+				document.getElementById(mammalDivNames[i][1] + "Answer").innerHTML = "disabled";
+				document.getElementById(mammalDivNames[i][1] + "Answer").style.display = "inline-block";
+				document.getElementById(mammalDivNames[i][1]).style.display = "none";
+			}
+		}
+	}
+	
+	for (i=0; i<mammalDivNames.length; i++) {
+		if (mammalDivNames[i][2] == true && thisMammal[mammalDivNames[i][1]] != "n/a") {
+			document.getElementById(mammalDivNames[i][1]).focus();
+			break;
+		}
+	}
+	
+	if (thisMammal["provincialStatus"] == "n/a") {
+		document.getElementById("provincialStatusAnswer").innerHTML = "n/a";
+		document.getElementById("provincialStatusAnswer").style.display = "inline-block";
+		document.getElementById("provincialBoxes").style.display = "none";
+	} else if (provincialStatusEnabled == false) {
+		document.getElementById("provincialStatusAnswer").innerHTML = "disabled";
+		document.getElementById("provincialStatusAnswer").style.display = "inline-block";
+		document.getElementById("provincialBoxes").style.display = "none";
+	} else {
+		somethingShowing = true;
+		document.getElementById("provincialBoxes").style.display = "inline-block";
+		document.getElementById("provincialStatusAnswer").style.display = "none";
+	}
+	
+	if (thisMammal["range"] == "n/a") {
+		document.getElementById("rangeAnswer").innerHTML = "n/a";
+		document.getElementById("rangeAnswer").style.display = "inline-block";
+		document.getElementById("rangeBoxes").style.display = "none";
+	} else if (rangeEnabled == false) {
+		document.getElementById("rangeAnswer").innerHTML = "disabled";
+		document.getElementById("rangeAnswer").style.display = "inline-block";
+		document.getElementById("rangeBoxes").style.display = "none";
+	} else {
+		somethingShowing = true;
+		document.getElementById("rangeBoxes").style.display = "inline-block";
+		document.getElementById("rangeAnswer").style.display = "none";
+	}
+	return somethingShowing;
+}
+
+// Set cookies for each of the quiz options
+function setCookies() {
+	for (i=0; i<mammalDivNames.length; i++) {
+		setCookie(mammalDivNames[i][1], mammalDivNames[i][2], 14);
+	}
+	setCookie("capitalization",checkCaps, 14);
+	setCookie("provStatus",provincialStatusEnabled, 14);
+	setCookie("range",rangeEnabled, 14);
+}
+
+// Set a cookie to remember quiz options
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// Decode a cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+// Check for cookies and set checkboxes appropriately
+function checkForCookies() {
+	for (i=0; i<mammalDivNames.length; i++) {
+		var gotCookie = getCookie(mammalDivNames[i][1]);
+		if (gotCookie == "true") {
+			document.getElementById(mammalDivNames[i][1]+"Checkbox").checked = true;
+		} else if (gotCookie == "false") {
+			document.getElementById(mammalDivNames[i][1]+"Checkbox").checked = false;
+		}
+	}
+	var gotCookieCaps = getCookie("capitalization");
+	if (gotCookieCaps == "true") {
+		document.getElementById("capitalization").checked = true;
+	} else if (gotCookieCaps == "false") {
+		document.getElementById("capitalization").checked = false;
+	}
+	var gotCookiePS = getCookie("provStatus");
+	if (gotCookiePS == "true") {
+		document.getElementById("provincialStatusCheckbox").checked = true;
+	} else if (gotCookiePS == "false") {
+		document.getElementById("provincialStatusCheckbox").checked = false;
+	}
+	var gotCookieRange = getCookie("range");
+	if (gotCookieRange == "true") {
+		document.getElementById("rangeCheckbox").checked = true;
+	} else if (gotCookieRange == "false") {
+		document.getElementById("rangeCheckbox").checked = false;
+	}
+}
+
+</script>
+
+<body onload="loadTasks()">
+
+	<div id="optionsBox">
+		<div id="optionsBoxInside">
+			<span class="emph">Quiz Options</span><br />
+			<span>What do you want the quiz to test you on?</span><br />
+			<span>
+					<label class="switch">
+					  <input type="checkbox" id="capitalization" onclick="checkboxes()">
+					  <span class="slider round"></span>
+					</label>
+					Capitalization <br />
+					<label class="switch">
+					  <input type="checkbox" id="commonNameCheckbox" onclick="checkboxes()" checked>
+					  <span class="slider round"></span>
+					</label>
+					Common Name<br />
+					<label class="switch">
+					  <input type="checkbox" id="spOrderCheckbox" onclick="checkboxes()" checked>
+					  <span class="slider round"></span>
+					</label>
+					Order<br />
+				
+					<label class="switch">
+					  <input type="checkbox" id="familyCheckbox" onclick="checkboxes()"checked>
+					  <span class="slider round"></span>
+					</label>
+					Family<br />
+				
+					<label class="switch">
+					  <input type="checkbox" id="speciesEpithetCheckbox" onclick="checkboxes()"checked>
+					  <span class="slider round"></span>
+					</label>
+					Species Epithet<br /> 
+				
+					<label class="switch">
+					  <input type="checkbox" id="provincialStatusCheckbox" onclick="checkboxes()" checked>
+					  <span class="slider round"></span>
+					</label>
+					Provincial Status<br />
+				
+					<label class="switch">
+					  <input type="checkbox" id="rangeCheckbox" onclick="checkboxes()" checked>
+					  <span class="slider round"></span>
+					</label>
+					Range<br />
+			</span>
+			<div class="exitButton" onclick="hideOptions()">Hide Options</div>
+		</div>
+	</div>
+	
+<h1 class="emph title">Mammals (Class Mammalia)</h1>
+
+<div class="content">
+
+	<div class="questions clearfix">
+		<span class="inputLine">
+			<span class="inputName">Common Name: </span>
+			<input class="inputText" id="commonName" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>
+			<span class="inputAnswer" id="commonNameAnswer"></span>
+			<span id="commonNameFeedback" class="inputFeedback"></span>
+		</span>
+		<span class="inputLine">
+			<span class="inputName">Order: </span>
+			<input class="inputText" id="spOrder" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>
+			<span class="inputAnswer" id="spOrderAnswer"></span>
+			<span id="spOrderFeedback" class="inputFeedback"></span>
+		</span>
+		<span class="inputLine">
+			<span class="inputName">Family: </span>
+			<input class="inputText" id="family" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>
+			<span class="inputAnswer" id="familyAnswer"></span>
+			<span id="familyFeedback"class="inputFeedback"></span>
+		</span>
+		<span class="inputLine">
+			<span class="inputName" id="speciesEpithetLabel">Species Epithet: </span>
+			<input class="inputText" id="speciesEpithet" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>
+			<span class="inputAnswer" id="speciesEpithetAnswer"></span>
+			<span id="speciesEpithetFeedback" class="inputFeedback"></span>
+		</span>
+		<span class="inputLine">
+			<span class="inputName">Provincial Status:</span>
+			<span class="provincialBoxes inputText" id="provincialBoxes">
+				<label class="yellowBox psBox"><input type="checkbox" name="yellow" value="yellow" id="provincialCheckbox1"/>Yellow</label>
+				<label class="blueBox psBox"><input type="checkbox" name="blue" value="blue" id="provincialCheckbox2"/>Blue</label>
+				<label class="redBox psBox"><input type="checkbox" name="red" value="red" id="provincialCheckbox3"/>Red</label>
+			</span>
+			<!--<input class="inputText" id="provincialStatus" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>-->
+			<span class="inputAnswer" id="provincialStatusAnswer"></span>
+			<span id="provincialStatusFeedback" class="inputFeedback"></span>
+		</span>
+		<span class="inputLine">
+			<span class="inputName">Range:</span>
+			<span class="inputAnswer" id="rangeAnswer"></span>
+			<span id="rangeFeedback" class="inputFeedback"></span><br />
+			<span class="rangeBoxes" id="rangeBoxes">
+				<span class="rangeContainer"><input type="radio" name="range" value="range0" id="range0"/><span class="rangeBox" id="rangepic0" onclick='document.getElementById("range0").click()'></span></span>
+				<span class="rangeContainer"><input type="radio" name="range" value="range1" id="range1"/><span class="rangeBox" id="rangepic1" onclick='document.getElementById("range1").click()'></span></span>
+				<span class="rangeContainer"><input type="radio" name="range" value="range2" id="range2"/><span class="rangeBox" id="rangepic2" onclick='document.getElementById("range2").click()'></span></span>
+			</span>
+		</span>
+		
+		<button class="button" type="button" id="checkAnswerButton" onclick="checkAnswers()">Check Answers</button>
+		<input class='button' id='newMammal' onclick='setNewMammal()' type='submit' name='submit' value='Get a New Animal' />
+		<input class='button' onclick='showAnswers()' type='submit' name='submit' value='Show Answers' />
+		
+		<div class="quizOptionsButton" onclick="showOptions()">Quiz Options</div>
+	</div>
+	
+	<div class="pictures clearfix" id="picture"></div>
+				
+</div>
+	
+<a href="../index.html"><div class="footer"></div></a>
+
+</body>
+</html>

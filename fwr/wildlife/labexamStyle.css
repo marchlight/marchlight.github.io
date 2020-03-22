@@ -1,0 +1,73 @@
+.title {
+	padding-left: 40px;
+}
+
+.testAnimal {
+	width: 100%;
+	padding: 15px;
+}
+
+.examArea {
+	width: 90%;
+	position: relative;
+	display: flex;
+}
+
+.question {
+	width: 44%;
+	height: auto;
+	display: inline-block;
+	padding: 20px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.picImage {
+	max-width: 90vw;
+	max-height: 50vh;
+	display: inline-block;
+	text-align: center;
+}
+
+.inputText {
+	margin-top: 15px;
+	width: 100%;
+}
+
+.provincialBoxes {
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.psBox {
+	width: 83px;
+	text-align: center;
+	display: inline-block;
+	padding: 3px 0px 3px 0px;
+}
+
+.yellowBox {
+	background: #FFF54C;
+}
+
+.redBox {
+	background: #FF4A6B;
+}
+
+.blueBox {
+	background: #1D99CC;
+}
+
+.rangeImg {
+	width: 130px;
+	display: inline-block;
+	padding-right: 10px;
+}
+
+.right {
+	background: #BFFFCC;
+}
+
+.wrong {
+	background: #FFA6B3;
+}
