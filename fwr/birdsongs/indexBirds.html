@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="birdStyle.css">
+<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
+<title>Bird Songs</title>
+
+</head>
+
+<script type='text/javascript'>
+
+var birdList = new Array();
+var quizList = new Array();
+var thisBird;
+
+function loadTasks() {
+	var rawBirds = initializeFiles("birdsong_List.csv");
+	birdList = setBirdVars(rawBirds);
+	printBirds();
+	startNewQuiz();
+}
+
+// Read the bird songs file
+function initializeFiles(fileLoc) {
+	var readFile = new Array();
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", fileLoc, false);
+	rawFile.onreadystatechange = function () {
+		if(rawFile.readyState == 4 && rawFile.status == 200) {
+			var allText = rawFile.responseText;
+			readFile = allText.split("\n");
+		}
+	}
+	rawFile.send(null);
+	return(readFile);
+}
+
+// Put the bird song list into an array of objects
+function setBirdVars(inputList) {
+	for (var i = 0; i < inputList.length; i++) {
+		var thisSpecies = inputList[i].split(",")
+		var newSpecies = {
+			name: thisSpecies[0],
+			fileLoc: thisSpecies[1],
+			img: thisSpecies[2],
+			count: 0,
+			gotRight: false,
+			confusedWith: ""
+		}
+		birdList.push(newSpecies);
+	}
+	return(birdList);
+}
+
+// Print all birds divs
+function printBirds() {
+	
+	var buildHTML = "";
+	for (var i = 0; i < birdList.length; i++) {
+		buildHTML = buildHTML + "<div><span class='name'>" + birdList[i].name + ": </span><audio controls><source src='sounds/" + birdList[i].fileLoc + "' type='audio/mp3'> Your browser does not support the audio element.</audio></div>";
+	}
+	document.getElementById("birdSongsDiv").innerHTML = buildHTML;
+}
+
+// Initialize quiz on page loadTasks
+function startNewQuiz() {
+	quizList = [];
+	for (var i = 0; i < birdList.length; i++) 
+	{
+		birdList[i].count = 0;
+		birdList[i].gotRight = false;
+		birdList[i].confusedWith = "";
+		quizList.push(birdList[i]);
+	}
+}
+
+// Open quiz page
+function startQuiz() {
+	document.getElementById("birdSongsDiv").innerHTML = "<div id='quiz'><div class='quizQuestions'><span id='quizAudio'></span></div><div id='answer'></div><div class='quizQuestions'><input id='nameEntered' onkeypress='if (event.keyCode == 13) document.getElementById(\"checkAnswerButton\").click()'/><button class='button' type='button' id='checkAnswerButton' onclick='checkAnswer()'>Check Answer</button></div><div class='quizQuestions extraPadding bottomPadding'><input class='button' id='newBird' onclick='runQuiz(quizList)' type='submit' name='submit' value='Get a New Bird' /><input class='button' onclick='showAnswer()' type='submit' name='submit' value='Show Answer' /></div></div><div class='rightList'><p>Birds you got right on the first try:</p><div class='firstTry' id='rightAnswers'></div><p>Birds you got right on the second try:</p><div class='secondTry' id='rightAnswers1'></div><p>Review these birds:</p><div class='moreTries' id='rightAnswers2'></div></div>";
+	runQuiz(quizList);
+	updateRightAnswers();
+}
+
+function updateRightAnswers() {
+	var buildHTML1 = "<div class='row'>";
+	var buildHTML2 = "";
+	var buildHTML3 = "";
+	for (var i = 0; i < birdList.length; i++) {
+		if (birdList[i].gotRight == true) {
+			if (birdList[i].count == 0) {
+				buildHTML1 = buildHTML1 + "<div class='column'>" + birdList[i].name + "</div>";
+			} else if (birdList[i].count == 1) {
+				buildHTML2 = buildHTML2 + "<div class='row'>" + birdList[i].name;
+				if (birdList[i].confusedWith != "") {
+					buildHTML2 = buildHTML2 + " (confused with " + birdList[i].confusedWith + ")";
+				}
+				buildHTML2 = buildHTML2 + "</div>"
+			} else if (birdList[i].count > 1) {
+				buildHTML3 = buildHTML3 + "<div class='row'>" + birdList[i].name;
+				if (birdList[i].confusedWith != "") {
+					buildHTML3 = buildHTML3 + " (confused with " + birdList[i].confusedWith + ")";
+				}
+				buildHTML3 = buildHTML3 + "</div>";
+			}
+		}
+	}
+	buildHTML1 = buildHTML1 + "</div>";
+	buildHTML2 = buildHTML2 + "";
+	buildHTML3 = buildHTML3 + "";
+	document.getElementById("rightAnswers").innerHTML = buildHTML1;
+	document.getElementById("rightAnswers1").innerHTML = buildHTML2;
+	document.getElementById("rightAnswers2").innerHTML = buildHTML3;
+}
+
+// Run the quiz
+function runQuiz(localQuizList) {
+	thisBird = pickBird(localQuizList);
+	document.getElementById("checkAnswerButton").disabled = false;
+	document.getElementById("answer").innerHTML = "";
+	document.getElementById("nameEntered").value = "";
+	var buildHTML = "<audio controls autoplay><source src='sounds/" + thisBird.fileLoc + "' type='audio/mp3'> Your browser does not support the audio element.</audio>";
+	document.getElementById("quizAudio").innerHTML = buildHTML;
+	document.getElementById("nameEntered").focus();
+}
+
+// Pick a random bird
+function pickBird(list) {
+	var newInt = Math.floor(Math.random() * list.length);
+	var newBird = list[newInt];
+	return newBird;
+}
+
+// Show Answer
+function showAnswer() {
+	document.getElementById("answer").innerHTML = thisBird.name;
+	thisBird.count = 2;
+}
+
+// Check Answer
+function checkAnswer() {
+	var enteredTemp = document.getElementById("nameEntered").value;
+	var entered = enteredTemp.replace("’","'");
+	if (entered.toLowerCase() == thisBird.name.toLowerCase()) {
+		document.getElementById("answer").innerHTML = "You're Right!";
+		document.getElementById("checkAnswerButton").disabled = true;
+		thisBird.gotRight = true;
+		var ind = quizList.indexOf(thisBird);
+		quizList.splice(ind,1);
+		updateRightAnswers();
+		document.getElementById("newBird").focus();
+		if (quizList.length == 0) {
+			document.getElementById("quiz").innerHTML = "<div class='quizQuestions'><p>Congratulations! You finished the list!</p><button class='button' type='button' onclick='startNewQuiz(); startQuiz()'>Restart Quiz</button></div>";
+		}
+	} else {
+		document.getElementById("answer").innerHTML = "Sorry, try again.";
+		thisBird.count = thisBird.count + 1;
+		for (var i = 0; i < birdList.length; i++) {
+			if (birdList[i].name.toLowerCase() == entered.toLowerCase()) {
+				if (thisBird.confusedWith == "") {
+					thisBird.confusedWith = thisBird.confusedWith + birdList[i].name;
+				} else {
+					thisBird.confusedWith = thisBird.confusedWith + ", " + birdList[i].name;				
+				}
+			}
+		}
+	}
+}
+
+var matchBird;
+var matchBirdList;
+// Open matching page
+function startMatching(){
+	document.getElementById("birdSongsDiv").innerHTML = "<div id='matchOptions'></div><div id='soundFile'></div><div id='matchAnswer'></div><div style='text-align:center'><button class='button' id='matchButton' type='button' onclick='startMatching()'>Get a New Match</button></div>";
+	matchBird = pickBird(birdList);
+	matchBirdList = new Array();
+	matchBirdList.push(matchBird);
+	for (var i = 0; i < 3; i++) {
+		var newBird = pickBird(birdList);
+		while (matchBirdList.includes(newBird) == true) {
+			newBird = pickBird(birdList);
+		}
+		matchBirdList.push(newBird);
+	}
+	shuffle(matchBirdList);
+	setAudioDiv(matchBird);
+	setMatchingDiv(matchBirdList);
+}
+
+function setAudioDiv(bird) {
+	var buildHTML = "<audio class='matchAudioBar' controls autoplay><source src='sounds/" + bird.fileLoc + "' type='audio/mp3'> Your browser does not support the audio element.</audio>";
+	document.getElementById("soundFile").innerHTML = buildHTML;
+}
+
+function setMatchingDiv(birdList) {
+	var buildHTML = "";
+	for (var i = 0; i < birdList.length; i++) {
+		buildHTML = buildHTML + "<span class='matchOption' onClick='checkMatch(" + i + ")'><img src='photos/" + birdList[i].img + "' /></span>";
+		if (i==1) {
+			buildHTML = buildHTML + "<br />";
+		}
+	}
+	document.getElementById("matchOptions").innerHTML = buildHTML;
+}
+
+function checkMatch(birdClickedIndex) {
+	if (matchBirdList[birdClickedIndex] == matchBird) {
+		document.getElementById("matchAnswer").innerHTML = "You're right! It's a " + matchBirdList[birdClickedIndex].name + ".";
+		document.getElementById("matchButton").focus();
+		//setTimeout(startMatching, 5000);
+	} else {
+		document.getElementById("matchAnswer").innerHTML = "Sorry, try again. That's a " + matchBirdList[birdClickedIndex].name + ".";
+	}
+}
+
+// Shuffle Array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+
+</script>
+
+<body onload="loadTasks()">
+
+<h1 class="emph">Bird Songs</h1>
+
+<div class="content">
+
+	<div class="navBarBirds">
+		<span class="birdPage emph" onClick="printBirds()">Sound Files</span>
+		<span class="birdPage emph" onClick="startQuiz()">Quiz</span>
+		<span class="birdPage emph" onClick="startMatching()">Matching</span>
+	</div>
+	
+	<div id="birdSongsDiv"></div>
+
+	<p style="text-align:center" class="extraPadding">Credit for all audio files goes to Dendroica Canada. Photos are from Wikimedia Commons.</p>
+
+</div>
+
+<a href="../index.html"><div class="footer"></div></a>
+
+</body>
+</html>
