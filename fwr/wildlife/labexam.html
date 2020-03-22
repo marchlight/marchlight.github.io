@@ -142,7 +142,7 @@ function askQuestions(divName,thisQuestion) {
 			"<span class='rangeContainer'><input type='radio' name='range' value='range2' id='range2'/><span class='rangeBox' id='rangepic2' onclick='document.getElementById(&#39;range2&#39;).click()'></span></span></span>";
 		
 		var newInt = Math.floor(Math.random() * 3);
-		document.getElementById("rangepic" + newInt).innerHTML = "<img class='rangeImg' src='img/range/" + thisMammal.range + "' />";
+		document.getElementById("rangepic" + newInt).innerHTML = "<img class='rangeImg' src='img/range/" + thisMammal.range + ".jpg' />";
 		document.getElementById("range" + newInt).value = thisMammal.range;
 		for (i=0; i<3; i++) {
 			if (i != newInt) {
@@ -150,7 +150,7 @@ function askQuestions(divName,thisQuestion) {
 				while (rangeInt == thisMammal.range) {
 					rangeInt = Math.floor(Math.random() * numRanges) + 1;
 				}
-				document.getElementById("rangepic" + i).innerHTML = "<img class='rangeImg' src='img/range/" + rangeInt + "'/>";
+				document.getElementById("rangepic" + i).innerHTML = "<img class='rangeImg' src='img/range/" + rangeInt + ".jpg'/>";
 				document.getElementById("range" + i).value = rangeInt;
 			}
 		}
