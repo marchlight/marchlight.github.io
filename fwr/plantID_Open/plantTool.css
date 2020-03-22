@@ -1,0 +1,81 @@
+h1 {
+    color: #1A3D7F;
+    margin-left: 20px;
+	font-family: Georgia, serif;
+	font-size: 26px;
+}
+
+body {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+.button {
+    background-color: #ffffff;
+    border: 2px solid #1A3D7F;
+    color: #1A3D7F;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+    margin: 8px 2px;
+    cursor: pointer;
+	border-radius: 4px;
+}
+
+.button:hover {
+    background-color: #D8E9FF;
+}
+
+#nameEntered {
+	border: 1px solid #1A3D7F;
+	padding: 8px;
+	font-size: 16px;
+}
+
+#main {
+	float: right;
+	width: 80%;
+}
+
+#rightAnswersContainer {
+	float: left;
+	width: 20%;
+}
+
+#rightAnswersHeader {
+    color: #1A3D7F;
+	font-size: 16px;
+	padding: 20px;
+	font-family: Georgia, serif;
+	border-bottom: 1px solid #1A3D7F;
+}
+
+#rightAnswers {
+	padding-top: 10px;
+}
+
+#explanation {
+	width: 60%;
+}
+
+#versions {
+	position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.dynamicText {
+	min-height: 18px;
+}
+
+a:link {
+	color: #1A3D7F;
+}
+
+td {
+	padding: 10px;
+	text-align: center;
+}
+
+td:nth-child(even) {
+	background-color: #D8E9FF;
+}

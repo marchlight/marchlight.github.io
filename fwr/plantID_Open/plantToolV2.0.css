@@ -1,0 +1,35 @@
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+
+#rightAnswersContainer {
+	float: left;
+	width: 20%;
+}
+
+#rightAnswersHeader {
+	font-size: 16px;
+	padding: 20px;
+}
+
+#main {
+	float: right;
+	width: 80%;
+
+}
+
+#versions {
+	position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+td {
+	padding: 10px;
+	text-align: center;
+}
+
+td:nth-child(even) {
+	background-color: #f2f2f2;
+}

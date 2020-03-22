@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="plantTool.css">
+<title>RENR 1125 - Plant ID Practice</title>
+
+</head>
+
+<body onload="initializePlantLists()">
+<div id="plants" align="center">
+
+<script type='text/javascript'>
+	var imageList = new Array();
+	var plantList = new Array();
+	var gotRight = new Array();
+	var shrubList = new Array();
+	var dwarfshrubList = new Array();
+	var herbsList = new Array();
+	var fernsList = new Array();
+	var introducedList = new Array();
+	var treeList = new Array();
+	var thisPlant;
+		
+	/* 
+	Fill a temp array with the plant types the user has checked off
+	and return the array of plants. Called whenever the "Get a New Plant"
+	button is pressed.
+	*/
+	function updatePlantList() {
+		var localArray = new Array();
+		localArray = [];
+		if (document.getElementById("shrubsCheckbox").checked) {
+			localArray = localArray.concat(shrubList);
+		}
+		if (document.getElementById("dwarfShrubsCheckbox").checked) {
+			localArray = localArray.concat(dwarfshrubList);
+		}
+		if (document.getElementById("herbsCheckbox").checked) {
+			localArray = localArray.concat(herbsList);
+		}
+		if (document.getElementById("fernsCheckbox").checked) {
+			localArray = localArray.concat(fernsList);
+		}
+		if (document.getElementById("introducedCheckbox").checked) {
+			localArray = localArray.concat(introducedList);
+		}
+		if (document.getElementById("treeCheckbox").checked) {
+			localArray = localArray.concat(treeList);
+		}
+		return localArray;
+	}
+	
+	/* 
+	Read the .csv files for each type of plant and populate each
+	of the lists with all the plant species. Called when the page is loaded.
+	*/
+	function initializePlantLists() {
+		shrubList = readPlantList("shrubs2.csv");
+		dwarfshrubList = readPlantList("dwarfshrubs.csv");
+		herbsList = readPlantList("herbs.csv");
+		fernsList = readPlantList("ferns.csv");
+		introducedList = readPlantList("introduced.csv");
+		treeList = readPlantList("trees.csv");
+		getNewPlant();
+		updateListTotals();
+	}
+	function readPlantList(fileName) {
+		var rawFile = new XMLHttpRequest();
+		var localPlantList = new Array();
+		rawFile.open("GET", fileName, false);
+		rawFile.onreadystatechange = function () {
+			if(rawFile.readyState == 4 && rawFile.status == 200) {
+				var allText = rawFile.responseText;
+				localPlantList = allText.split("\n");
+			}
+		}
+		rawFile.send(null);
+		return localPlantList;
+	}
+	
+	/*
+	Finds a random new plant from the list of remaining plants
+	*/
+	function pickPlant() {
+		var newPlant = thisPlant; // set newPlant to the current plant
+		if (plantList.length>1) { // only run if there is more than one plant left
+			while (newPlant==thisPlant) { // keep searching until new plant != current plant
+				newInt = Math.floor(Math.random() * plantList.length);
+				newPlant = plantList[newInt];
+			}
+		} else { // else if only one plant left, pick that plant
+			newPlant = plantList[0];
+
+		}
+		return newPlant;
+	}
+	
+	/*
+	If there are still plants left, call the pick a new plant function. If not,
+	display a congratulations message. Also clears any text pertaining to 
+	the current plant.
+	*/
+	function getNewPlant() {
+		plantList = updatePlantList();
+		if (plantList.length>0) {
+			thisPlant = pickPlant();
+			loadDoc(thisPlant);
+		}
+		else {
+			document.getElementById('feedback').innerHTML = "It looks like there's no plants left of this type! Either you've gotten them all right already" +
+			" or you haven't checked any boxes. Refresh the page to clear the list and start over, or select another group of plants.";
+		}
+		document.getElementById('latinName').innerHTML = "";
+		document.getElementById('nameEntered').value = "";
+		document.getElementById('checkAnswerText').innerHTML = "";
+	}
+	
+	/*
+	Load the images for the current plant
+	*/
+	function loadDoc(localPlant) {
+		document.getElementById('feedback').innerHTML = "Loading..."; // user feedback
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				readXML(this);
+				document.getElementById('plantImageText').innerHTML = "";
+				document.getElementById('feedback').innerHTML = "";
+			}
+		};
+		xhttp.open("GET", "http://linnet.geog.ubc.ca/ShowDBImage/gallery.aspx?page=0&specrep=0&latinName=" + encodeURI(localPlant), true);
+		xhttp.send();
+	}
+	
+	/*
+	Gets HTML and pulls out images, puts URLs into imageList
+	*/
+	function readXML(xml) {
+		var i;
+		var xmlDoc = xml.responseText;
+		parser = new DOMParser();
+		htmlDoc = parser.parseFromString(xmlDoc, "text/html");
+		var imageObjects = htmlDoc.getElementsByClassName('image');
+		imageList = [];
+		for (i = 0; i < imageObjects.length; i++) {
+			var tempString = String(imageObjects[i].src);
+			var part2 = tempString.split("index=");
+			var part3 = part2[1].split("&");
+			imageList[i] = "http://linnet.geog.ubc.ca/ShowDBImage/ShowImage.aspx?index=" + part3[0] + "&size=StandardPhoto";
+		}
+		changeImage();
+	}
+
+	/*
+	Show the name of the current plant
+	*/
+	function showAnswer() { 
+		document.getElementById('latinName').innerHTML = thisPlant;
+	}
+
+	/*
+	Get a random new image of the current plant
+	*/
+	function changeImage() {
+		var newNum = Math.floor(Math.random() * imageList.length);
+		document.getElementById('plantImage').src = imageList[newNum];
+	}
+	
+	/*
+	Compare the user's input to the actual plant name, ignoring case. If right, add the
+	plant to the list of "got right" plants and splice the plant from the appropriate
+	list. If wrong, give feedback to the user.
+	*/
+	function checkName() {
+		var entered, text;
+
+		entered = document.getElementById("nameEntered").value;
+		
+		if (entered.toLowerCase() == thisPlant.toLowerCase()){
+			text = "You're right!";
+			if (gotRight.includes(thisPlant) == false) {
+				gotRight.push(thisPlant);
+			}
+			shrubList = spliceList(shrubList);
+			dwarfshrubList = spliceList(dwarfshrubList);
+			herbsList = spliceList(herbsList);
+			fernsList = spliceList(fernsList);
+			introducedList = spliceList(introducedList);
+			treeList = spliceList(treeList);
+		} else {
+			text = "Sorry, try again";
+		}
+		document.getElementById("checkAnswerText").innerHTML = text;
+		var rightList = "";
+		gotRight.sort();
+		for (var i = 0; i < gotRight.length; i++) {
+			rightList = rightList.concat(gotRight[i] + "<br />");
+			document.getElementById("rightAnswers").innerHTML = rightList;
+		}
+		updateListTotals();
+	}
+	
+	/*
+	Update text to show the remaining number of plants in each group
+	*/
+	function updateListTotals() {
+		document.getElementById("shrubsRemaining").innerHTML = "(" + shrubList.length + ")";
+		document.getElementById("dwarfshrubRemaining").innerHTML = "(" + dwarfshrubList.length + ")";
+		document.getElementById("herbsRemaining").innerHTML = "(" + herbsList.length + ")";
+		document.getElementById("fernsRemaining").innerHTML = "(" + fernsList.length + ")";
+		document.getElementById("introducedRemaining").innerHTML = "(" + introducedList.length + ")";
+		document.getElementById("treesRemaining").innerHTML = "(" + treeList.length + ")";
+	}
+	
+	/*
+	Remove the current plant from the appropriate list
+	*/
+	function spliceList(list) {
+		var i = list.indexOf(thisPlant);
+			if (list.length==1 && i >=0) {
+				return [];
+			}
+			else if (i >=0) {
+				list.splice(i,1);
+			}
+		return list;
+	}
+	
+	/*
+	Handles the "check all" toggle
+	*/
+	function toggle(source) {
+		var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i] != source)
+            checkboxes[i].checked = source.checked;
+		}
+	}
+	
+</script>
+
+
+<div id="rightAnswersContainer">
+	<div id="rightAnswersHeader">Plants You've Correctly Identified This Session</div>
+	<div id="rightAnswers"> </div>
+</div>
+
+<div id="main">
+	<div>
+	<h1>Plant ID Study Tool</h1>
+	
+	</div>
+
+	<div><p><button class="button" onclick='changeImage()'>New Picture of this Plant</button></p></div>
+
+	<div id="imageBox">
+		<img id='plantImage' src='' /><div id="plantImageText" ></div>
+		<p>
+			<input id="nameEntered">
+			<button class="button" type="button" onclick="checkName()">Check Answer</button>
+			<div id="checkAnswerText" class="dynamicText"></div>
+		</p>
+	</div>
+
+	<p>
+		<button class="button" onclick='showAnswer()'>Show Answer</button>
+		<div id='latinName' class="dynamicText"></div>
+	</p>
+
+	
+	<p>
+		<input class="button" onclick='getNewPlant()' type="submit" name="submit" value="Get a New Plant" />
+		<div id="feedback" class="dynamicText"> </div>
+	</p>
+	
+	<table id="checkboxes">
+		<tr>
+			<td><input type="checkbox" onclick="toggle(this);" checked="true"/></td>
+			<td><input type="checkbox" id="shrubsCheckbox" value="shrubs" checked="true"/></td>
+			<td><input type="checkbox" id="dwarfShrubsCheckbox" value="dwarfShrubs" checked="true"/></td>
+			<td><input type="checkbox" id="herbsCheckbox" value="herbs" checked="true"/></td>
+			<td><input type="checkbox" id="fernsCheckbox" value="ferns" checked="true"/></td>
+			<td><input type="checkbox" id="introducedCheckbox" value="introduced" checked="true"/></td>
+			<td><input type="checkbox" id="treeCheckbox" value="introduced" checked="true"/></td>
+		</tr>
+		<tr>
+			<td>Check all</td>
+			<td>Shrubs<div id="shrubsRemaining"></div></td>
+			<td>Dwarf Shrubs<div id="dwarfshrubRemaining"></div></td>
+			<td>Herbs<div id="herbsRemaining"></div></td>
+			<td>Ferns and Allies<div id="fernsRemaining"></div></td>
+			<td>Introduced<div id="introducedRemaining"></div></td>
+			<td>Trees<div id="treesRemaining"></div></td>
+		</tr>
+	</table>
+	
+	<div id="explanation">
+		<p>This site picks a random plant from our final lab exam list, then grabs a picture from e-Flora. You can click "New Picture of this Plant" to cycle through pictures
+		from e-Flora. Once you know what it is, enter the Scientic name in the text box and click "Check Answer". If you don't know, you can click on "Show Answer". Once you're 
+		done with this particular plant, click "Get a New Plant" at the bottom to be redirected to another random plant from the list.</p>
+	</div>
+</div>
+
+</div>
+</body>
+</html>
