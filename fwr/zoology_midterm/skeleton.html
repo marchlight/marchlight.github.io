@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<link rel="stylesheet" type="text/css" href="../style.css">
+<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
+<title>RENR 2230 - Skeleton</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 25;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+function pressEnter() {
+	if (event.keyCode == 13) document.getElementById('checkAnswers').click();
+}
+
+</script>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/skeleton.JPG" width="800px"/>
+	</div>
+	<input id="0" name="skull" style="position: absolute; left: 30px; top: 105px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="1" name="maxilla" style="position: absolute; left: 385px; top: 127px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="2" name="mandible" style="position: absolute; left: 385px; top: 150px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="3" name="clavicle" style="position: absolute; left: 385px; top: 205px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="4" name="scapula" style="position: absolute; left: 385px; top: 228px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="5" name="sternum" style="position: absolute; left: 75px; top: 255px; width:50px;"  onkeypress="pressEnter()" ></li>
+	<input id="6" name="rib" style="position: absolute; left: 75px; top: 297px; width:40px;"  onkeypress="pressEnter()" ></li>
+	<input id="7" name="humerus" style="position: absolute; left: 385px; top: 315px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="8" name="vertebral column" style="position: absolute; left:360px; top: 362px; width:120px;"  onkeypress="pressEnter()" /></li>
+	<input id="9" name="ulna" style="position: absolute; left: 394px; top: 396px; width:50px;"  onkeypress="pressEnter()" ></li>
+	<input id="10" name="pelvic girdle" style="position: absolute; left: 740px; top: 405px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="11" name="pelvic girdle" style="position: absolute; left: 20px; top: 425px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="12" name="sacrum" style="position: absolute; left: 392px; top: 442px; width:55px;"  onkeypress="pressEnter()" ></li>
+	<input id="13" name="coccyx" style="position: absolute; left: 392px; top: 465px; width:55px;"  onkeypress="pressEnter()" ></li>
+	<input id="14" name="radius" style="position: absolute; left: 394px; top: 487px; width:50px;"  onkeypress="pressEnter()" ></li>
+	<input id="15" name="carpal" style="position: absolute; left: 385px; top: 510px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="16" name="metacarpal" style="position: absolute; left: 375px; top: 580px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="17" name="phalange" style="position: absolute; left: 720px; top: 628px; width:80px;"  onkeypress="pressEnter()" ></li>
+	<input id="18" name="femur" style="position: absolute; left: 385px; top: 637px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="19" name="patella" style="position: absolute; left: 385px; top: 680px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="20" name="tibia" style="position: absolute; left: 385px; top: 733px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="21" name="fibula" style="position: absolute; left: 385px; top: 787px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="22" name="tarsal" style="position: absolute; left: 385px; top: 904px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="23" name="metatarsal" style="position: absolute; left: 370px; top: 930px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="24" name="phalange" style="position: absolute; left: 370px; top: 955px; width:80px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" id="checkAnswers"/>Check Answers</button>
+	<p>Not shown in this picture, but we need to know ilium, ischium, and pubic bone (all 3 are in the pelvic girdle)</p>
+</div>
+
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

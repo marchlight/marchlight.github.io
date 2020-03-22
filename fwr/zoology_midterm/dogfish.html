@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<title>RENR 2230 - Practice Exam - Dogish</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 30;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+</script>
+
+<div class="content"><a href="index.html">Go back to main page</a></div>
+
+<div class="content">Note: I couldn't find any good pictures on D2L, so these pictures are from the internet. There were a lot of parts we don't need to know, so you'll notice the list skips a lot of numbers. <a href="http://www.cumberland.k12.il.us/Pages/HighSchool/Starwalt/Starwalt%20Projects/Shark%20Web%20Pages/vertebrate_biology_shark_dissect.htm">Picture credit</a></div>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="0" name="rostrum"></li>
+			<li><input id="1" name="eye"></li>
+			<li><input id="2" name="spiracle"></li>
+			<li><input id="3" name="lateral line"></li>
+			<li value=6><input id="4" name="first dorsal fin"></li>
+			<li><input id="5" name="second dorsal fin"></li>
+			<li>dorsal lobe of fin</li>
+			<li><input id="6" name="caudal fin"></li>
+			<li value=11><input id="7" name="pelvic fin"></li>
+			<li><input id="8" name="pectoral fin"></li>
+			<li><input id="9" name="gill slit"></li>
+			<li><input id="10" name="mouth"></li>
+			<li><input id="11" name="nostril"></li>
+			<li value=18><input id="12" name="liver"></li>
+			<li><input id="13" name="liver"></li>
+			<li><input id="14" name="gall bladder"></li>
+			<li><input id="15" name="stomach"></li>
+			<li><input id="16" name="duodenum"></li>
+			<li><input id="17" name="spiral intestine"></li>
+			<li value=28><input id="18" name="pancreas"></li>
+			<li value=30><input id="19" name="spleen"></li>
+			<li><input id="20" name="kidney"></li>
+			<li>rectal gland</li>
+			<li>bile duct</li>
+			<li><input id="21" name="testis"></li>
+			<li value=36><input id="22" name="sinus venosus"></li>
+			<li><input id="23" name="sperm sac"></li>
+			<li value=39><input id="24" name="ventricle"></li>
+			<li><input id="25" name="atrium"></li>
+			<li><input id="26" name="conus arteriosus"></li>
+			<li><input id="27" name="gill"></li>
+			<li>transverse septum</li>
+			<li>ductus deferens (sperm duct)</li>
+			<li>dorsal aorta</li>
+			<li><input id="28" name="ovary"></li>
+			<li><input id="29" name="afferent branchial arteries"></li>
+			<li>celiac artery</li>
+			
+			
+			
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button> <br />
+		
+	</div>
+	
+	<div style="width:calc(100% - 270px); float:left">
+		<img src="img/dogfish1.jpg" />
+		<img src="img/dogfish2.jpg" />
+		<img src="img/dogfish3.jpg" />
+		<img src="img/dogfish4.jpg" />
+		<img src="img/dogfish7.jpg" />
+		<img src="img/dogfish6.jpg" />
+		<img src="img/dogfish5.jpg" />
+		<img src="img/dogfish8.jpg" />
+		<img src="img/dogfish9.jpg" />
+		<img src="img/dogfish10.jpg" />
+	</div>
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

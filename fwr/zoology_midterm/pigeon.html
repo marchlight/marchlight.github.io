@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<link rel="stylesheet" type="text/css" href="../style.css">
+<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
+<title>RENR 2230 - Pigeon</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 45;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+function pressEnter() {
+	if (event.keyCode == 13) document.getElementById('checkAnswers').click();
+}
+
+</script>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/pigeon1.jpg" width="800px"/>
+	</div>
+	<input id="0" name="esophagus" style="position: absolute; left:350px; top: 145px; width:120px;"  onkeypress="pressEnter()" /></li>
+	<input id="1" name="trachea" style="position: absolute; left: 575px; top: 245px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="2" name="crop" style="position: absolute; left: 240px; top: 320px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="3" name="esophagus" style="position: absolute; left: 190px; top: 435px; width:120px;"  onkeypress="pressEnter()" ></li>
+	<input id="4" name="ventricle" style="position: absolute; left: 570px; top: 490px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="5" name="lung" style="position: absolute; left: 203px; top: 537px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="6" name="lung" style="position: absolute; left: 523px; top: 577px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="7" name="liver" style="position: absolute; left: 218px; top: 655px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="8" name="gizzard" style="position: absolute; left: 560px; top: 655px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="9" name="duodenum" style="position: absolute; left: 540px; top: 780px; width:120px;"  onkeypress="pressEnter()" ></li>
+	<input id="10" name="small intestine" style="position: absolute; left: 170px; top: 835px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="11" name="pancreas" style="position: absolute; left: 515px; top: 925px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="12" name="cloaca" style="position: absolute; left: 343px; top: 939px; width:70px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" id="checkAnswers"/>Check Answers</button> <br />
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/pigeon2.jpg" width="700px" style="padding-left:50px"/>
+	</div>
+	<input id="13" name="ventricle" style="position: absolute; left:535px; top: 149px; width:120px;"  onkeypress="pressEnter()" /></li>
+	<input id="14" name="syrinx" style="position: absolute; left: 555px; top: 250px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="15" name="spleen" style="position: absolute; left: 140px; top: 320px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="16" name="bronchial tube" style="position: absolute; left: 540px; top: 320px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="17" name="duodenum" style="position: absolute; left: 80px; top: 385px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="18" name="proventriculus" style="position: absolute; left: 490px; top: 380px; width:120px;"  onkeypress="pressEnter()" ></li>
+	<input id="19" name="pancreas" style="position: absolute; left: 70px; top: 553px; width:90px;"  onkeypress="pressEnter()" ></li>
+	<input id="20" name="jejunum" style="position: absolute; left: 115px; top: 648px; width:80px;"  onkeypress="pressEnter()" ></li>
+	<input id="21" name="colic caeca" style="position: absolute; left: 252px; top: 733px; width:80px;"  onkeypress="pressEnter()" ></li>
+	<input id="22" name="large intestine" style="position: absolute; left: 265px; top: 850px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="23" name="duodenum" style="position: absolute; left: 487px; top: 442px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="24" name="pancreas" style="position: absolute; left: 635px; top: 442px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="25" name="ileum" style="position: absolute; left: 480px; top: 718px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="26" name="mesentery" style="position: absolute; left: 645px; top: 732px; width:100px;"  onkeypress="pressEnter()" ></li>
+	<input id="27" name="colic caeca" style="position: absolute; left: 670px; top: 815px; width:80px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" />Check Answers</button> <br />
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/pigeon3.jpg" width="700px" style="padding-left:40px"/>
+	</div>
+	<input id="28" name="ventricle" style="position: absolute; left:460px; top: 65px; width:120px;"  onkeypress="pressEnter()" /></li>
+	<input id="29" name="liver" style="position: absolute; left: 100px; top: 265px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="30" name="lung" style="position: absolute; left: 535px; top: 403px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="31" name="spleen" style="position: absolute; left: 75px; top: 463px; width:60px;"  onkeypress="pressEnter()" ></li>
+	<input id="32" name="testes" style="position: absolute; left: 150px; top: 520px; width:65px;"  onkeypress="pressEnter()" ></li>
+	<input id="33" name="kidney" style="position: absolute; left: 575px; top: 595px; width:75px;"  onkeypress="pressEnter()" ></li>
+	<input id="34" name="ureter" style="position: absolute; left: 472px; top: 695px; width:70px;"  onkeypress="pressEnter()" ></li>
+	<input id="35" name="small intestine" style="position: absolute; left: 83px; top: 727px; width:95px;"  onkeypress="pressEnter()" ></li>
+	<input id="36" name="large intestine" style="position: absolute; left: 75px; top: 845px; width:95px;"  onkeypress="pressEnter()" ></li>
+	<input id="37" name="colic caeca" style="position: absolute; left: 350px; top: 845px; width:75px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" />Check Answers</button> <br />
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/pigeon4.jpg" width="700px" style="padding-left:40px"/>
+	</div>
+	<input id="38" name="posterior uropygial gland" style="position: absolute; left:405px; top: 382px; width:170px;"  onkeypress="pressEnter()" /></li>
+	<input id="39" name="cere" style="position: absolute; left: 60px; top: 490px; width:45px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" />Check Answers</button> <br />
+</div>
+
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="40" name="primaries" onkeypress="pressEnter()" ></li>
+			<li>Greater primary coverts</li>
+			<li>Alula</li>
+			<li><input id="41" name="secondaries" onkeypress="pressEnter()" ></li>
+			<li>Greater secondary coverts</li>
+			<li>Median secondary coverts</li>
+			<li>Lesser secondary coverts</li>
+			<li><input id="42" name="tertials" onkeypress="pressEnter()" ></li>
+			<li>Scapulares</li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/pigeon5.png" width="700px"/><br />
+		<a href="https://commons.wikimedia.org/wiki/File:BirdWingFeatherSketch.svg">Image source: Kjoonlee</a>
+	</div>
+	
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/pigeon6.jpg" width="700px" /><br />
+		<a href="https://jb004.k12.sd.us/my%20website%20info/biology%202/animal%20kingdom/pigeon%20dissection/FEMALE%20PIGEON.htm">Image source</a>
+	</div>
+	<input id="43" name="ovary" style="position: absolute; left:370px; top: 135px; width:60px;"  onkeypress="pressEnter()" /></li>
+	<input id="44" name="oviduct" style="position: absolute; left: 155px; top: 345px; width:70px;"  onkeypress="pressEnter()" ></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" />Check Answers</button> <br />
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

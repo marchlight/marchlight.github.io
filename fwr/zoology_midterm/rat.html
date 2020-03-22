@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<link rel="stylesheet" type="text/css" href="../style.css">
+<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
+<title>RENR 2230 - Rat</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 56;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+function pressEnter() {
+	if (event.keyCode == 13) document.getElementById('checkAnswers').click();
+}
+
+</script>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="0" name="trachea" onkeypress="pressEnter()" ></li>
+			<li><input id="1" name="carotid artery" onkeypress="pressEnter()" ></li>
+			<li>Internal <input id="2" name="jugular vein" onkeypress="pressEnter()" ></li>
+			<li>External <input id="3" name="jugular vein" onkeypress="pressEnter()" ></li>
+			<li>Subclavian vein</li>
+			<li><input id="4" name="vena cava" onkeypress="pressEnter()" ></li>
+			<li><input id="5" name="esophagus" onkeypress="pressEnter()" ></li>
+			<li><input id="6" name="subclavian artery" onkeypress="pressEnter()" ></li>
+			<li>Vagus nerve</li>
+			<li><input id="7" name="aortic arch" onkeypress="pressEnter()" ></li>
+			<li>Innominate artery</li>
+			<li><input id="8" name="left atrium" onkeypress="pressEnter()" ></li>
+			<li><input id="9" name="right atrium" onkeypress="pressEnter()" ></li>
+			<li><input id="10" name="ventricle" onkeypress="pressEnter()" ></li>
+			<li><input id="11" name="lung" onkeypress="pressEnter()" ></li>
+			<li><input id="12" name="lymph node" onkeypress="pressEnter()" ></li>
+			<li>Parotid gland</li>
+			<li>Sublingual gland</li>
+			<li>Submandibular gland</li>
+			<li><input id="13" name="thyroid" onkeypress="pressEnter()" ></li>
+			<li><input id="14" name="thymus" onkeypress="pressEnter()" ></li>
+			<li><input id="15" name="diaphragm" onkeypress="pressEnter()" ></li>
+			<li>Xiphoid process</li>
+			<li><input id="16" name="spleen" onkeypress="pressEnter()" ></li>
+			<li><input id="17" name="liver" onkeypress="pressEnter()" ></li>
+			<li><input id="18" name="stomach" onkeypress="pressEnter()" ></li>
+			<li><input id="19" name="small intestine" onkeypress="pressEnter()" ></li>
+			<li><input id="20" name="pancreas" onkeypress="pressEnter()" ></li>
+			<li><input id="21" name="cecum" onkeypress="pressEnter()" ></li>
+			<li>Appendix</li>
+			<li>Colon</li>
+			<li><input id="22" name="kidney" onkeypress="pressEnter()" ></li>
+			<li><input id="23" name="ureter" onkeypress="pressEnter()" ></li>
+			<li><input id="24" name="aorta" onkeypress="pressEnter()" ></li>
+			<li><input id="25" name="vena cava" onkeypress="pressEnter()" ></li>
+			<li>Vesicular gland</li>
+			<li>Coagulating gland</li>
+			<li><input id="26" name="urinary bladder" onkeypress="pressEnter()" ></li>
+			<li>Prostate gland</li>
+			<li><input id="27" name="penis" onkeypress="pressEnter()" ></li>
+			<li>Preputial gland</li>
+			<li>Scrotum</li>
+			<li><input id="28" name="testes" onkeypress="pressEnter()" ></li>
+			<li><input id="29" name="epididymis" onkeypress="pressEnter()" ></li>
+			<li><input id="30" name="vas deferens" onkeypress="pressEnter()" ></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()" id="checkAnswers">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/rat1.jpg" width="700px"/>
+	</div>
+</div>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li>Fecal pellet in colon</li>
+			<li>Colon</li>
+			<li><input id="31" name="uterine horn" onkeypress="pressEnter()" ></li>
+			<li><input id="32" name="oviduct" onkeypress="pressEnter()" ></li>
+			<li><input id="33" name="ovary" onkeypress="pressEnter()" ></li>
+			<li><input id="34" name="vagina" onkeypress="pressEnter()" ></li>
+			<li><input id="35" name="urinary bladder" onkeypress="pressEnter()" ></li>
+			<li>Preputial gland</li>
+			<li>Clitoris</li>
+			<li><input id="36" name="anus" onkeypress="pressEnter()" ></li>
+			<li><input id="37" name="kidney" onkeypress="pressEnter()" ></li>
+			<li>Adrenal gland</li>
+			<li>Celiac artery</li>
+			<li>Cranial mesenteric artery</li>
+			<li><input id="38" name="vena cava" onkeypress="pressEnter()" ></li>
+			<li>Suprarenal vein</li>
+			<li><input id="39" name="renal vein" onkeypress="pressEnter()" ></li>
+			<li><input id="40" name="renal artery" onkeypress="pressEnter()" ></li>
+			<li><input id="41" name="aorta" onkeypress="pressEnter()" ></li>
+			<li><input id="42" name="ureter" onkeypress="pressEnter()" ></li>
+			<li>Ovarian vein</li>
+			<li>Iliolumbar vein</li>
+			<li>Iliolumbar artery</li>
+			<li>Common iliac vein</li>
+			<li>Common iliac artery</li>
+			<li>Caudal mesenteric</li>
+			<li><input id="43" name="stomach" onkeypress="pressEnter()" ></li>
+			<li><input id="44" name="esophagus" onkeypress="pressEnter()" ></li>
+			<li><input id="45" name="pyloric sphincter" onkeypress="pressEnter()" ></li>
+			<li><input id="46" name="duodenum" onkeypress="pressEnter()" ></li>
+			<li><input id="47" name="pancreas" onkeypress="pressEnter()" ></li>
+			<li>Adipose tissue</li>
+			<li>Bile duct</li>
+			<li><input id="48" name="liver" onkeypress="pressEnter()" ></li>
+			<li><input id="49" name="spleen" onkeypress="pressEnter()" ></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()" id="checkAnswers">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/rat2.jpg" width="700px"/>
+	</div>
+</div>
+
+<div class="row" style="position: relative;">
+	<div class="picture">
+		<img src="img/rat3.JPG" width="500px" style="padding-left:40px"/>
+	</div>
+	<input id="50" name="nare" style="position: absolute; left:105px; top: 30px; width:60px;"  onkeypress="pressEnter()" /></li>
+	<input id="51" name="vibrissae" style="position: absolute; left:420px; top: 73px; width:90px;"  onkeypress="pressEnter()" /></li>
+	<input id="52" name="mammary papillae" style="position: absolute; left:415px; top: 275px; width:120px;"  onkeypress="pressEnter()" /></li>
+	<input id="53" name="urethral orifice" style="position: absolute; left:60px; top: 475px; width:100px;"  onkeypress="pressEnter()" /></li>
+	<input id="54" name="anus" style="position: absolute; left:100px; top: 522px; width:60px;"  onkeypress="pressEnter()" /></li>
+	<input id="55" name="vaginal orifice" style="position: absolute; left:415px; top: 500px; width:100px;"  onkeypress="pressEnter()" /></li>
+</div>
+
+<div class="content">
+	<button class="button" type="button" onclick="checkAnswers()" />Check Answers</button>
+	<p>Things I couldn't find good pictures for that we need to know: salivary glands, jejunum, ileum, large intestine, rectum, mesentery, larynx, seminal vesicles, urethra</p>
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+	<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

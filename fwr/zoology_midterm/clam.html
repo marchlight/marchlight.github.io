@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<title>RENR 2230 - Practice Exam - Clam</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 20;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+
+</script>
+
+<a href="index.html">Go back to main page</a>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="0" name="gill"></li>
+			<li><input id="1" name="anterior adductor muscle"></li>
+			<li>anterior foot retractor</li>
+			<li>pericardium</li>
+			<li><input id="2" name="posterior adductor muscle"></li>
+			<li>posterior foot retractor</li>
+			<li><input id="3" name="foot"></li>
+			<li><input id="4" name="excurrent siphon"></li>
+			<li><input id="5" name="incurrent siphon"></li>
+			<li>pallial muscle</li>
+			<li><input id="6" name="labial palp"></li>
+			<li>mouth</li>
+			<li><input id="7" name="mantle"></li>
+			<li>kidney</li>
+			<li>auricle</li>
+			<li>ventricle</li>
+			<li>aorta</li>
+			<li><input id="8" name="visceral mass"></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/clam.JPG" />
+	</div>
+</div>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="9" name="foot"></li>
+			<li>mouth</li>
+			<li>esophagus</li>
+			<li>stomach</li>
+			<li>intestine</li>
+			<li>rectum</li>
+			<li>gonads</li>
+			<li>ventricle of heart</li>
+			<li><input id="10" name="anterior adductor muscle"></li>
+			<li><input id="11" name="posterior adductor muscle"></li>
+			<li>posterior foot retractor</li>
+			<li>kidney</li>
+			<li>anus</li>
+			<li><input id="12" name="gill"></li>
+			<li><input id="13" name="mantle"></li>
+			<li>pallial muscle</li>
+			<li>digestive gland</li>
+			<li><input id="14" name="incurrent siphon"></li>
+			<li><input id="15" name="excurrent siphon"></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture" style="width:70%;">
+		<img src="img/clam2.JPG" style="width:100%;"/>
+	</div>
+</div>
+	
+<div class="row" style="position: relative;">
+	<div>
+		<img src="img/clam3.JPG" />
+	</div>
+	<input id="16" name="hinge ligament" style="position: absolute; left:200px; top: 30px;"></li>
+	<input id="17" name="valve" style="position: absolute; left: 500px; top: 350px;"></li>
+	<input id="18" name="growth line" style="position: absolute; left:300px; top: 440px;"></li>
+	<input id="19" name="umbo" style="position: absolute; left: 450px; top: 80px;"></li>
+</div>
+<div class="content">
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button> <br />
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

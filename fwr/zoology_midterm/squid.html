@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<title>RENR 2230 - Practice Exam - Squid</title>
+
+</head>
+
+<body>
+
+
+<script type='text/javascript'>
+var numQuestions = 26;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+
+</script>
+
+<a href="index.html">Go back to main page</a>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="0" name="funnel"></li>
+			<li>articulating ridge</li>
+			<li>articulating cartilage</li>
+			<li><input id="1" name="retractor muscle"></li>
+			<li>liver</li>
+			<li><input id="2" name="gill"></li>
+			<li>branchial vein</li>
+			<li><input id="3" name="ink sac"></li>
+			<li><input id="4" name="anus"></li>
+			<li><input id="5" name="rectum"></li>
+			<li><input id="6" name="branchial heart"></li>
+			<li><input id="7" name="kidney"></li>
+			<li><input id="8" name="stomach"></li>
+			<li>penis</li>
+			<li><input id="9" name="testes"></li>
+			<li>spermatophoric gland</li>
+			<li>cecum</li>
+			<li>vas deferens</li>
+			<li><input id="10" name="pen"></li>
+			<li><input id="11" name="nidamental gland"></li>
+			<li>accessory nidamental gland</li>
+			<li><input id="12" name="ovary"></li>
+			<li>oviduct</li>
+			<li>oviducal gland</li>
+			<li><input id="13" name="systemic heart"></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/squid.JPG" />
+	</div>
+</div>
+
+<div class="row" style="position: relative; padding-left:100px;">
+	<div>
+		<img src="img/squid2.JPG" />
+	</div>
+	<input id="14" name="tentacle" style="position: absolute; left:110px; top: 27px; width:80px;"></li>
+	<input id="15" name="head" style="position: absolute; left: 110px; top: 270px; width:60px;"></li>
+	<input id="16" name="eye" style="position: absolute; left: 110px; top: 325px; width:40px;"></li>
+	<input id="17" name="funnel" style="position: absolute; left: 110px; top: 380px; width:50px;"></li>
+	<input id="18" name="arm" style="position: absolute; left: 360px; top: 260px; width:60px;"></li>
+	<input id="19" name="collar" style="position: absolute; left: 280px; top: 375px; width:60px;"></li>
+	<input id="20" name="mantle" style="position: absolute; left: 210px; top: 590px; width:60px;"></li>
+	<input id="21" name="fin" style="position: absolute; left: 140px; top: 810px; width:60px;"></li>
+	<input id="22" name="pen" style="position: absolute; left: 380px; top: 888px; width:60px;"></li>
+	<input id="23" name="buccal mass" style="position: absolute; left: 460px; top: 536px; width:100px;"></li>
+	<input id="24" name="beak" style="position: absolute; left: 640px; top: 531px; width:60px;"></li>
+	<input id="25" name="esophagus" style="position: absolute; left: 460px; top: 719px; width:84px;"></li>
+</div>
+
+<div class="content">
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button> <br />
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="zoomid.css">
+<title>RENR 2230 - Practice Exam - Bony Fish</title>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+var numQuestions = 32;
+
+function checkAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name) {
+			document.getElementById(i).classList.add('right');
+		} else if (document.getElementById(i).value.toLowerCase() == document.getElementById(i).name + "s") {
+			document.getElementById(i).classList.add('right');
+		}
+	}
+}
+
+function hideAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = "";
+		document.getElementById(i).classList.remove('right');
+	}
+}
+
+function showAnswers() {
+	for (i = 0; i < numQuestions; i++) {
+		document.getElementById(i).value = document.getElementById(i).name;
+	}
+}
+
+</script>
+
+<a href="index.html">Go back to main page</a>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="0" name="first dorsal fin"></li>
+			<li><input id="1" name="second dorsal fin"></li>
+			<li><input id="2" name="caudal fin"></li>
+			<li><input id="3" name="anal fin"></li>
+			<li><input id="4" name="pelvic fin"></li>
+			<li><input id="5" name="pectoral fin"></li>
+			<li><input id="6" name="operculum"></li>
+			<li><input id="7" name="lateral line"></li>
+			<li><input id="8" name="mouth"></li>
+			<li><input id="9" name="gill"></li>
+			<li><input id="10" name="ventricle"></li>
+			<li><input id="11" name="liver"></li>
+			<li><input id="12" name="stomach"></li>
+			<li><input id="13" name="pyloric caeca"></li>
+			<li>duodenum</li>
+			<li><input id="14" name="intestine"></li>
+			<li>spleen</li>
+			<li><input id="15" name="kidney"></li>
+			<li>urinary bladder</li>
+			<li><input id="16" name="anus"></li>
+			<li>urogenital pore(s)</li>
+			<li><input id="17" name="gonad"></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/bonyfish.JPG" />
+	</div>
+</div>
+
+<div class="row">
+	<div class="answers">
+		Enter Answers
+		<ol>
+			<li><input id="18" name="liver"></li>
+			<li>duodenum</li>
+			<li><input id="19" name="ovary"></li>
+			<li><input id="20" name="intestine"></li>
+			<li><input id="21" name="anus"></li>
+			<li><input id="22" name="swim bladder"></li>
+			<li><input id="23" name="testis"></li>
+			<li><input id="24" name="gill"></li>
+			<li><input id="25" name="gill raker"></li>
+			<li><input id="26" name="ventricle"></li>
+			<li><input id="27" name="atrium"></li>
+			<li><input id="28" name="bulbus arteriosus"></li>
+			<li><input id="29" name="gall bladder"></li>
+			<li><input id="30" name="mouth"></li>
+		</ol>
+		<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+	</div>
+	<div class="picture">
+		<img src="img/bonyfish2.JPG" />
+	</div>
+</div>
+
+<div class="content">
+		<button class="button" type="button" onclick="showAnswers()">Show All Answers</button>
+		<button class="button" type="button" onclick="hideAnswers()" style="background-color: #f44336;">Erase All Answers</button>
+</div>
+
+<div class="content">
+<a href="index.html">Go back to main page</a>
+</div>
+
+</body>
+</html>
