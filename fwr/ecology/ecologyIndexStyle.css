@@ -1,0 +1,28 @@
+.title {
+	padding-left: 20px;
+}
+
+.content {
+	padding-left: 20px;
+}
+
+.option {
+	width: 40%;
+	padding: 20px;
+	float: left;
+}
+
+.link {
+	text-decoration: underline;
+	font-size: 2em;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
