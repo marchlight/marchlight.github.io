@@ -1,72 +1,35 @@
-Coyote,Carnivora,Canidae,n/a,yellow,coyote2.jpg,12,https://flic.kr/p/bEYz1
-Grey Wolf,Carnivora,Canidae,n/a,yellow,wolf2.jpg,13,https://flic.kr/p/8zWTqi
-Red Fox,Carnivora,Canidae,n/a,yellow,redfox2.jpg,14,
-Black Bear,Carnivora,Ursidae,n/a,yellow,blackbear.jpg,15,https://flic.kr/p/bFb3AR
-Grizzly Bear,Carnivora,Ursidae,n/a,blue,grizzlybear.jpg,11,https://flic.kr/p/bqLHBX
-Raccoon,Carnivora,Procyonidae,n/a,yellow,raccoon2.jpg,16,
-Sea Otter,Carnivora,Mustelidae,n/a,blue,seaotter.jpg,17,https://flic.kr/p/i63ZV3
-Wolverine,Carnivora,Mustelidae,n/a,bluered,wolverine2.jpg,18,
-River Otter,Carnivora,Mustelidae,n/a,yellow,riverotter2.jpg,19,
-Fisher,Carnivora,Mustelidae,n/a,blue,fisher2.jpg,21,
-Least Weasel,Carnivora,Mustelidae,n/a,yellow,leastweasel.jpg,10,
-Ermine,Carnivora,Mustelidae,n/a,bluered,shorttailedweasel2.jpg,22,
-Long-tailed Weasel,Carnivora,Mustelidae,n/a,red,longtailedweasel2.jpg,23,
-Mink,Carnivora,Mustelidae,n/a,yellow,mink2.jpg,24,
-American Badger,Carnivora,Mustelidae,n/a,red,badger2.jpg,25,
-Marten,Carnivora,Mustelidae,n/a,yellow,marten.jpg,20,
-Striped Skunk,Carnivora,Mephitidae,n/a,yellow,stripedskunk2.jpg,26,
-Spotted Skunk,Carnivora,Mephitidae,n/a,n/a,spottedskunk2.jpg,27,
-Cougar,Carnivora,Felidae,n/a,yellow,cougar.jpg,28,https://flic.kr/p/9ZvphF
-Canada Lynx,Carnivora,Felidae,n/a,yellow,lynx2.jpg,29,
-Bobcat,Carnivora,Felidae,n/a,yellow,bobcat2.jpg,30,
-Northern Fur Seal,Carnivora,Otariidae,n/a,red,furseal.jpg,n/a,https://bit.ly/2FIjrYZ
-Steller Sea Lion,Carnivora,Otariidae,n/a,blue,stelsealion.jpg,n/a,https://flic.kr/p/8NKx2a
-California Sea Lion,Carnivora,Otariidae,n/a,yellow,calsealion.jpg,n/a,https://flic.kr/p/p2Q1xy
-Northern Elephant Seal,Carnivora,Phocidae,n/a,red,elephantseal.jpg,n/a,https://flic.kr/p/qAp8d2
-Harbour Seal,Carnivora,Phocidae,n/a,yellow,harbourseal.jpg,n/a,https://flic.kr/p/oNtBzV
-Mountain Goat,Artiodactyla,Bovidae,Oreamnos americanus,yellow,mountaingoat.jpg,1,https://flic.kr/p/6SW4ew
-Bison,Artiodactyla,Bovidae,Bos bison,red,bison.jpg,3,https://flic.kr/p/ft727R
-Bighorn Sheep,Artiodactyla,Bovidae,Ovis canadensis,blue,bighornsheep.jpg,2,https://flic.kr/p/qzhVHS
-Thinhorn Sheep,Artiodactyla,Bovidae,Ovis dalli,blue,thinhornsheep.jpg,4,https://flic.kr/p/zBvzCZ
-Elk,Artiodactyla,Cervidae,Cervus canadensis,blue,elk.jpg,5,https://flic.kr/p/iCMc2v
-Caribou,Artiodactyla,Cervidae,Rangifer tarandus,bluered,caribou.jpg,6,https://flic.kr/p/pWbV99
-White-tailed Deer,Artiodactyla,Cervidae,Odocoileus virginianus,yellow,whitetaileddeer.jpg,7,https://flic.kr/p/9rpe2Y
-Mule Deer,Artiodactyla,Cervidae,Odocoileus hemionus,yellow,muledeer.jpg,8,https://flic.kr/p/7J9fjc
-Moose,Artiodactyla,Cervidae,Alces americanus,yellow,moose.jpg,9,https://flic.kr/p/oeN98j
-Black Bear,Carnivora,Ursidae,n/a,yellow,trackblackbear.jpg,n/a,
-Grizzly Bear,Carnivora,Ursidae,n/a,blue,trackgrizzlybear.jpg,n/a,
-Coyote,Carnivora,Canidae,n/a,yellow,trackcoyote.jpg,n/a,
-Grey Wolf,Carnivora,Canidae,n/a,yellow,trackwolf.jpg,n/a,
-n/a,Carnivora,Felidae,n/a,n/a,trackfelidae.jpg,n/a,
-n/a,Carnivora,Mustelidae,n/a,n/a,trackmustelid.jpg,n/a,
-n/a,Artiodactyla,n/a,n/a,n/a,trackungulate.jpg,n/a,
-Elk,Artiodactyla,Cervidae,Cervus canadensis,blue,skullelk.jpg,5,
-Thinhorn Sheep,Artiodactyla,Bovidae,Ovis dalli,blue,skullthinhorn.jpg,4,
-Horse,Perissodactyla,Equidae,n/a,n/a,skullhorse.jpg,n/a,
-Moose,Artiodactyla,Cervidae,Alces americanus,yellow,skullmoose.jpg,9,
-Caribou,Artiodactyla,Cervidae,Rangifer tarandus,bluered,skullcaribou.jpg,6,
-Bighorn Sheep,Artiodactyla,Bovidae,Ovis canadensis,blue,skullbighorn.jpg,2,
-White-tailed Deer,Artiodactyla,Cervidae,Odocoileus virginianus,yellow,skullwhitetaileddeer.jpg,7,
-Mountain Goat,Artiodactyla,Bovidae,Oreamnos americanus,yellow,skullmountaingoat.jpg,1,
-Mule Deer,Artiodactyla,Cervidae,Odocoileus hemionus,yellow,skullmuledeer.jpg,8,
-Blue Whale,Cetacea,Rorqual,Mysteceti,red,bluewhale.jpg,n/a,
-Fin Whale,Cetacea,Rorqual,Mysteceti,red,finwhale.jpg,n/a,
-Humpback Whale,Cetacea,Rorqual,Mysteceti,blue,humpbackwhale.jpg,n/a,
-Minke Whale,Cetacea,Rorqual,Mysteceti,yellow,minkewhale.jpg,n/a,
-Sei Whale,Cetacea,Rorqual,Mysteceti,red,seiwhale.jpg,n/a,
-Grey Whale,Cetacea,Grey Whale,Mysteceti,blue,greywhale.jpg,n/a,
-North Pacific Right Whale,Cetacea,Right Whale,Mysteceti,red,rightwhale.jpg,n/a, 
-n/a,Cetacea,Delphinid,Odontoceti,n/a,falsekillerwhale.jpg,n/a,
-Killer Whale,Cetacea,Delphinid,Odontoceti,bluered,orca.jpg,n/a,
-n/a,Cetacea,Delphinid,Odontoceti,n/a,rightwhaledolphin.jpg,n/a,
-Pacific White-sided Dolphin,Cetacea,Delphinid,Odontoceti,yellow,whitesideddolphin.jpg,n/a,
-n/a,Cetacea,Delphinid,Odontoceti,n/a,rissosdolphin.jpg,n/a,
-n/a,Cetacea,Delphinid,Odontoceti,n/a,shortfinnedpilotwhale.jpg,n/a,
-n/a,Cetacea,Delphinid,Odontoceti,n/a,stripeddolphin.jpg,n/a,
-Dall's Porpoise,Cetacea,Porpoise,Odontoceti,yellow,dallsporpoise.jpg,n/a,
-Harbour Porpoise,Cetacea,Porpoise,Odontoceti,blue,harbourporpoise.jpg,n/a,
-Bering Sea Beaked Whale,Cetacea,Beaked Whale,Odontoceti,blue,beringseawhale.jpg,n/a,
-n/a,Cetacea,Beaked Whale,Odontoceti,n/a,goosebeakedwhale.jpg,n/a,https://bit.ly/2YYo2PQ
-n/a,Cetacea,Beaked Whale,Odontoceti,n/a,bottlenosedwhale.jpg,n/a,
-n/a,Cetacea,Sperm Whale,Odontoceti,n/a,dwarfspermwhale.jpg,n/a,  
-Sperm Whale,Cetacea,Sperm Whale,Odontoceti,blue,spermwhale.jpg,n/a,https://www.flickr.com/photos/barathieu/7277953560/
+Coyote,Carnivora,Canidae,n/a,n/a,coyote2.jpg,https://flic.kr/p/bEYz1
+Grey Wolf,Carnivora,Canidae,n/a,n/a,wolf2.jpg,https://flic.kr/p/8zWTqi
+Red Fox,Carnivora,Canidae,n/a,n/a,redfox2.jpg,
+Black Bear,Carnivora,Ursidae,n/a,n/a,blackbear.jpg,https://flic.kr/p/bFb3AR
+Grizzly Bear,Carnivora,Ursidae,n/a,n/a,grizzlybear.jpg,https://flic.kr/p/bqLHBX
+Raccoon,Carnivora,Procyonidae,n/a,n/a,raccoon2.jpg,
+Sea Otter,Carnivora,Mustelidae,n/a,n/a,seaotter.jpg,https://flic.kr/p/i63ZV3
+Wolverine,Carnivora,Mustelidae,n/a,n/a,wolverine2.jpg,
+River Otter,Carnivora,Mustelidae,n/a,n/a,riverotter2.jpg,
+Fisher,Carnivora,Mustelidae,n/a,n/a,fisher2.jpg,
+Least Weasel,Carnivora,Mustelidae,n/a,n/a,leastweasel.jpg,
+Ermine,Carnivora,Mustelidae,n/a,n/a,shorttailedweasel2.jpg,
+Long-tailed Weasel,Carnivora,Mustelidae,n/a,n/a,longtailedweasel2.jpg,
+Mink,Carnivora,Mustelidae,n/a,n/a,mink2.jpg,
+American Badger,Carnivora,Mustelidae,n/a,n/a,badger2.jpg,
+Marten,Carnivora,Mustelidae,n/a,n/a,marten.jpg,
+Striped Skunk,Carnivora,Mephitidae,n/a,n/a,stripedskunk2.jpg,
+Spotted Skunk,Carnivora,Mephitidae,n/a,n/a,spottedskunk2.jpg,
+Cougar,Carnivora,Felidae,n/a,n/a,cougar.jpg,https://flic.kr/p/9ZvphF
+Canada Lynx,Carnivora,Felidae,n/a,n/a,lynx2.jpg,
+Bobcat,Carnivora,Felidae,n/a,n/a,bobcat2.jpg,
+Northern Fur Seal,Carnivora,Otariidae,n/a,n/a,furseal.jpg,https://bit.ly/2FIjrYZ
+Steller Sea Lion,Carnivora,Otariidae,n/a,n/a,stelsealion.jpg,https://flic.kr/p/8NKx2a
+California Sea Lion,Carnivora,Otariidae,n/a,n/a,calsealion.jpg,https://flic.kr/p/p2Q1xy
+Northern Elephant Seal,Carnivora,Phocidae,n/a,n/a,elephantseal.jpg,https://flic.kr/p/qAp8d2
+Harbour Seal,Carnivora,Phocidae,n/a,n/a,harbourseal.jpg,https://flic.kr/p/oNtBzV
+Mountain Goat,Artiodactyla,Bovidae,Oreamnos americanus,M-ORAM,mountaingoat.jpg,https://flic.kr/p/6SW4ew
+Bison,Artiodactyla,Bovidae,Bos bison,M-BOBI,bison.jpg,https://flic.kr/p/ft727R
+Bighorn Sheep,Artiodactyla,Bovidae,Ovis canadensis,n/a,bighornsheep.jpg,https://flic.kr/p/qzhVHS
+Thinhorn Sheep,Artiodactyla,Bovidae,Ovis dalli,n/a,thinhornsheep.jpg,https://flic.kr/p/zBvzCZ
+Elk,Artiodactyla,Cervidae,Cervus canadensis,n/a,elk.jpg,https://flic.kr/p/iCMc2v
+Caribou,Artiodactyla,Cervidae,Rangifer tarandus,n/a,caribou.jpg,https://flic.kr/p/pWbV99
+White-tailed Deer,Artiodactyla,Cervidae,Odocoileus virginianus,n/a,whitetaileddeer.jpg,https://flic.kr/p/9rpe2Y
+Mule Deer,Artiodactyla,Cervidae,Odocoileus hemionus,n/a,muledeer.jpg,https://flic.kr/p/7J9fjc
+Moose,Artiodactyla,Cervidae,Alces americanus,M-ALAM,moose.jpg,https://flic.kr/p/oeN98j
