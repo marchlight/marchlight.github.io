@@ -14,9 +14,7 @@
 var mammalList = new Array();
 var thisMammal;
 var checkCaps = false;
-var numRanges = 21;
 var riscCodeEnabled = true;
-var rangeEnabled = true;
 
 // Make an array to associate each field with the div id and true/false whether to check it
 var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true]/*,[4,"riscCode",true]*/];
@@ -55,7 +53,6 @@ function setMammalVars(inputList) {
 			speciesEpithet: thisSpecies[3],
 			riscCode: thisSpecies[4],
 			images: thisSpecies[5],
-			range: thisSpecies[6],
 			count: 0,
 			gotRight: false
 		}
@@ -83,22 +80,6 @@ function setNewMammal() {
 			document.getElementById("speciesEpithetLabel").innerHTML = "<b>Suborder</b>:";
 		} else {
 			document.getElementById("speciesEpithetLabel").innerHTML = "Species Epithet:";
-		}
-		// set ranges
-		if (thisMammal["range"] != "n/a") {
-			var newInt = Math.floor(Math.random() * 3);
-			document.getElementById("rangepic" + newInt).innerHTML = "<img class='rangeImg' src='img/range/" + thisMammal.range + "' />";
-			document.getElementById("range" + newInt).value = thisMammal.range;
-			for (i=0; i<3; i++) {
-				if (i != newInt) {
-					var rangeInt = thisMammal.range;
-					while (rangeInt == thisMammal.range) {
-						rangeInt = Math.floor(Math.random() * numRanges) + 1;
-					}
-					document.getElementById("rangepic" + i).innerHTML = "<img class='rangeImg' src='img/range/" + rangeInt + "'/>";
-					document.getElementById("range" + i).value = rangeInt;
-				}
-			}
 		}
 	} else {
 		document.getElementById("picture").innerHTML = "You finished the list, congratulations!! Refresh the page to start again... or go have a beer, you deserve it!";
@@ -131,16 +112,6 @@ function checkAnswers() {
 	if (thisMammal["riscCode"] != "n/a" && riscCodeEnabled == true) {
 		var gotItRight = false;
 		gotItRight = checkStatusCheckboxes();
-		if (gotItRight) {
-			rightAnswers++;
-		} else {
-			wrongAnswers++;
-		}
-	}
-	
-	if (thisMammal["range"] != "n/a" && rangeEnabled == true) {
-		var gotItRight = false;
-		gotItRight = checkRangeCheckboxes();
 		if (gotItRight) {
 			rightAnswers++;
 		} else {
@@ -193,27 +164,6 @@ function checkStatusCheckboxes() {
 	}
 }
 
-// See if range answers were right
-function checkRangeCheckboxes() {
-
-	var radios = document.getElementsByName('range');
-	var selectedRange;
-	for (var i = 0; i < radios.length; i++) {
-		if (radios[i].type === 'radio' && radios[i].checked) {
-			// get value, set checked flag or do whatever you need to
-			selectedRange = radios[i].value;       
-		}
-	}
-	
-	if (thisMammal["range"] == selectedRange) {
-		document.getElementById("rangeFeedback").innerHTML = "<img class='answerImg' src='img/yes.jpg' />";
-		return true;
-	} else {
-		document.getElementById("rangeFeedback").innerHTML = "<img class='answerImg' src='img/no.jpg' />";
-		return false;
-	}
-}
-
 // Show answers
 function showAnswers() {
 	for (i=0; i<mammalDivNames.length; i++) {
@@ -234,12 +184,6 @@ function showAnswers() {
 	} else {
 		document.getElementById("riscCodeCheckbox3").checked = false;
 	}
-	var radios = document.getElementsByName('range');
-	for (var i = 0; i < radios.length; i++) {
-		if (radios[i].value == thisMammal["range"]) {
-			radios[i].checked = true;
-		}
-	}
 }
 
 // Hide answers
@@ -250,10 +194,6 @@ function hideAnswers() {
 	for (i=0; i<3; i++) {
 		document.getElementById("riscCodeCheckbox"+[i+1]).checked = false;
 	}
-	var radios = document.getElementsByName('range');
-	for (var i = 0; i < radios.length; i++) {
-		radios[i].checked = false;
-	}
 }
 
 // Hide answer feedback image
@@ -262,7 +202,6 @@ function hideFeedbackImg() {
 		document.getElementById(mammalDivNames[i][1] + "Feedback").innerHTML = "";
 	}
 	document.getElementById("riscCodeFeedback").innerHTML = "";
-	document.getElementById("rangeFeedback").innerHTML = "";
 }
 
 // Show options menu
@@ -299,11 +238,6 @@ function checkboxes() {
 		riscCodeEnabled = true;
 	} else {
 		riscCodeEnabled = false;
-	}
-	if (document.getElementById("rangeCheckbox").checked == true) {
-		rangeEnabled = true;
-	} else {
-		rangeEnabled = false;
 	}
 }
 
@@ -351,20 +285,6 @@ function tidyInputs() {
 		document.getElementById("riscCodeBoxes").style.display = "inline-block";
 		document.getElementById("riscCodeAnswer").style.display = "none";
 	}
-	
-	if (thisMammal["range"] == "n/a") {
-		document.getElementById("rangeAnswer").innerHTML = "n/a";
-		document.getElementById("rangeAnswer").style.display = "inline-block";
-		document.getElementById("rangeBoxes").style.display = "none";
-	} else if (rangeEnabled == false) {
-		document.getElementById("rangeAnswer").innerHTML = "disabled";
-		document.getElementById("rangeAnswer").style.display = "inline-block";
-		document.getElementById("rangeBoxes").style.display = "none";
-	} else {
-		somethingShowing = true;
-		document.getElementById("rangeBoxes").style.display = "inline-block";
-		document.getElementById("rangeAnswer").style.display = "none";
-	}
 	return somethingShowing;
 }
 
@@ -375,7 +295,6 @@ function setCookies() {
 	}
 	setCookie("capitalization",checkCaps, 14);
 	setCookie("provStatus",riscCodeEnabled, 14);
-	setCookie("range",rangeEnabled, 14);
 }
 
 // Set a cookie to remember quiz options
@@ -425,12 +344,6 @@ function checkForCookies() {
 	} else if (gotCookiePS == "false") {
 		document.getElementById("riscCodeCheckbox").checked = false;
 	}
-	var gotCookieRange = getCookie("range");
-	if (gotCookieRange == "true") {
-		document.getElementById("rangeCheckbox").checked = true;
-	} else if (gotCookieRange == "false") {
-		document.getElementById("rangeCheckbox").checked = false;
-	}
 }
 
 </script>
@@ -475,12 +388,6 @@ function checkForCookies() {
 					  <span class="slider round"></span>
 					</label>
 					RISC Code<br />
-				
-					<label class="switch">
-					  <input type="checkbox" id="rangeCheckbox" onclick="checkboxes()" checked>
-					  <span class="slider round"></span>
-					</label>
-					Range<br />
 			</span>
 			<div class="exitButton" onclick="hideOptions()">Hide Options</div>
 		</div>
@@ -525,16 +432,6 @@ function checkForCookies() {
 			<!--<input class="inputText" id="riscCode" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>-->
 			<span class="inputAnswer" id="riscCodeAnswer"></span>
 			<span id="riscCodeFeedback" class="inputFeedback"></span>
-		</span>
-		<span class="inputLine">
-			<span class="inputName">Range:</span>
-			<span class="inputAnswer" id="rangeAnswer"></span>
-			<span id="rangeFeedback" class="inputFeedback"></span><br />
-			<span class="rangeBoxes" id="rangeBoxes">
-				<span class="rangeContainer"><input type="radio" name="range" value="range0" id="range0"/><span class="rangeBox" id="rangepic0" onclick='document.getElementById("range0").click()'></span></span>
-				<span class="rangeContainer"><input type="radio" name="range" value="range1" id="range1"/><span class="rangeBox" id="rangepic1" onclick='document.getElementById("range1").click()'></span></span>
-				<span class="rangeContainer"><input type="radio" name="range" value="range2" id="range2"/><span class="rangeBox" id="rangepic2" onclick='document.getElementById("range2").click()'></span></span>
-			</span>
 		</span>
 		
 		<button class="button" type="button" id="checkAnswerButton" onclick="checkAnswers()">Check Answers</button>
