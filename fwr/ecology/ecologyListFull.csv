@@ -1,27 +1,27 @@
 Coyote,Carnivora,Canidae,Canis latrans,M-CALA,coyote.jpg,https://flic.kr/p/bEYz1
 Grey Wolf,Carnivora,Canidae,Canis lupus,M-CALU,wolf.jpg,https://flic.kr/p/8zWTqi
 Red Fox,Carnivora,Canidae,Vulpes vulpes,M-VUVU,redfox.jpg,
-Black Bear,Carnivora,Ursidae,n/a,n/a,blackbear.jpg,https://flic.kr/p/bFb3AR
-Grizzly Bear,Carnivora,Ursidae,n/a,n/a,grizzlybear.jpg,https://flic.kr/p/bqLHBX
+Black Bear,Carnivora,Ursidae,Ursus americanus,M-URAM,blackbear.jpg,https://flic.kr/p/bFb3AR
+Grizzly Bear,Carnivora,Ursidae,Ursus arctos,M-URAR,grizzlybear.jpg,https://flic.kr/p/bqLHBX
 Raccoon,Carnivora,Procyonidae,Procyon lotor,M-PRLO,raccoon.jpg,
-American Beaver,Rodentia,n/a,n/a,n/a,,
-Common Muskrat,Rodentia,n/a,n/a,n/a,,
-Douglas's Squirrel,Rodentia,n/a,n/a,n/a,,
-Red Squirrel,Rodentia,n/a,n/a,n/a,,
-Northern Flying Squirrel,Rodentia,n/a,n/a,n/a,,
-Eastern Grey Squirrel,Rodentia,n/a,n/a,n/a,,
+American Beaver,Rodentia,n/a,n/a,n/a,beaver.jpg,https://flic.kr/p/6UMhDz
+Common Muskrat,Rodentia,n/a,n/a,n/a,muskrat.jpg,https://flic.kr/p/LkpbpA
+Douglas's Squirrel,Rodentia,n/a,n/a,n/a,douglassquirrel.jpg,https://flic.kr/p/oyBwVt
+Red Squirrel,Rodentia,n/a,n/a,n/a,redsquirrel.jpg,https://flic.kr/p/6szR6m
+Northern Flying Squirrel,Rodentia,n/a,n/a,n/a,flyingsquirrel.jpg,https://flic.kr/p/7hPxZg
+Eastern Grey Squirrel,Rodentia,n/a,n/a,n/a,greysquirrel.jpg,https://flic.kr/p/6PQX3L
 Sea Otter,Carnivora,Mustelidae,n/a,n/a,seaotter.jpg,https://flic.kr/p/i63ZV3
 Wolverine,Carnivora,Mustelidae,n/a,n/a,wolverine2.jpg,
-River Otter,Carnivora,Mustelidae,n/a,n/a,riverotter2.jpg,
+American River Otter,Carnivora,Mustelidae,n/a,n/a,riverotter2.jpg,
 Fisher,Carnivora,Mustelidae,n/a,n/a,fisher2.jpg,
 Least Weasel,Carnivora,Mustelidae,n/a,n/a,leastweasel.jpg,
-Ermine,Carnivora,Mustelidae,n/a,n/a,shorttailedweasel2.jpg,
+Short-tailed Weasel,Carnivora,Mustelidae,n/a,n/a,shorttailedweasel2.jpg,
 Long-tailed Weasel,Carnivora,Mustelidae,n/a,n/a,longtailedweasel2.jpg,
 Mink,Carnivora,Mustelidae,n/a,n/a,mink2.jpg,
 American Badger,Carnivora,Mustelidae,n/a,n/a,badger2.jpg,
-Marten,Carnivora,Mustelidae,n/a,n/a,marten.jpg,
-Striped Skunk,Carnivora,Mephitidae,n/a,n/a,stripedskunk2.jpg,
-Spotted Skunk,Carnivora,Mephitidae,n/a,n/a,spottedskunk2.jpg,
+American Marten,Carnivora,Mustelidae,n/a,n/a,marten.jpg,
+Striped Skunk,Carnivora,Mephitidae,n/a,n/a,stripedskunk.jpg,
+Spotted Skunk,Carnivora,Mephitidae,n/a,n/a,spottedskunk.jpg,
 Cougar,Carnivora,Felidae,Puma concolor,M-PUCO,cougar.jpg,https://flic.kr/p/9ZvphF
 Canada Lynx,Carnivora,Felidae,Lynx canadensis,M-LYCA,lynx.jpg,
 Bobcat,Carnivora,Felidae,Lynx rufus,M-LYRU,bobcat.jpg,
