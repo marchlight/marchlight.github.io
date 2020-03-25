@@ -1,9 +1,15 @@
-Coyote,Carnivora,Canidae,n/a,n/a,coyote2.jpg,https://flic.kr/p/bEYz1
-Grey Wolf,Carnivora,Canidae,n/a,n/a,wolf2.jpg,https://flic.kr/p/8zWTqi
-Red Fox,Carnivora,Canidae,n/a,n/a,redfox2.jpg,
+Coyote,Carnivora,Canidae,Canis latrans,M-CALA,coyote.jpg,https://flic.kr/p/bEYz1
+Grey Wolf,Carnivora,Canidae,Canis lupus,M-CALU,wolf.jpg,https://flic.kr/p/8zWTqi
+Red Fox,Carnivora,Canidae,Vulpes vulpes,M-VUVU,redfox.jpg,
 Black Bear,Carnivora,Ursidae,n/a,n/a,blackbear.jpg,https://flic.kr/p/bFb3AR
 Grizzly Bear,Carnivora,Ursidae,n/a,n/a,grizzlybear.jpg,https://flic.kr/p/bqLHBX
-Raccoon,Carnivora,Procyonidae,n/a,n/a,raccoon2.jpg,
+Raccoon,Carnivora,Procyonidae,Procyon lotor,M-PRLO,raccoon.jpg,
+American Beaver,Rodentia,n/a,n/a,n/a,,
+Common Muskrat,Rodentia,n/a,n/a,n/a,,
+Douglas's Squirrel,Rodentia,n/a,n/a,n/a,,
+Red Squirrel,Rodentia,n/a,n/a,n/a,,
+Northern Flying Squirrel,Rodentia,n/a,n/a,n/a,,
+Eastern Grey Squirrel,Rodentia,n/a,n/a,n/a,,
 Sea Otter,Carnivora,Mustelidae,n/a,n/a,seaotter.jpg,https://flic.kr/p/i63ZV3
 Wolverine,Carnivora,Mustelidae,n/a,n/a,wolverine2.jpg,
 River Otter,Carnivora,Mustelidae,n/a,n/a,riverotter2.jpg,
@@ -16,9 +22,9 @@ American Badger,Carnivora,Mustelidae,n/a,n/a,badger2.jpg,
 Marten,Carnivora,Mustelidae,n/a,n/a,marten.jpg,
 Striped Skunk,Carnivora,Mephitidae,n/a,n/a,stripedskunk2.jpg,
 Spotted Skunk,Carnivora,Mephitidae,n/a,n/a,spottedskunk2.jpg,
-Cougar,Carnivora,Felidae,n/a,n/a,cougar.jpg,https://flic.kr/p/9ZvphF
-Canada Lynx,Carnivora,Felidae,n/a,n/a,lynx2.jpg,
-Bobcat,Carnivora,Felidae,n/a,n/a,bobcat2.jpg,
+Cougar,Carnivora,Felidae,Puma concolor,M-PUCO,cougar.jpg,https://flic.kr/p/9ZvphF
+Canada Lynx,Carnivora,Felidae,Lynx canadensis,M-LYCA,lynx.jpg,
+Bobcat,Carnivora,Felidae,Lynx rufus,M-LYRU,bobcat.jpg,
 Mountain Goat,Artiodactyla,Bovidae,Oreamnos americanus,M-ORAM,mountaingoat.jpg,https://flic.kr/p/6SW4ew
 Bison,Artiodactyla,Bovidae,Bos bison,M-BOBI,bison.jpg,https://flic.kr/p/ft727R
 Rocky Mountain Bighorn,Artiodactyla,Bovidae,Ovis canadensis canadensis,M-OVCA,bighornsheep.jpg,https://flic.kr/p/qzhVHS
