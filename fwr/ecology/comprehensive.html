@@ -13,7 +13,7 @@
 
 var mammalList = new Array();
 var thisMammal;
-var checkCaps = false;
+var checkCaps = true;
 var riscCodeEnabled = true;
 
 // Make an array to associate each field with the div id and true/false whether to check it
@@ -107,15 +107,6 @@ function checkAnswers() {
 			} else {
 				wrongAnswers++;
 			}
-		}
-	}
-	if (thisMammal["riscCode"] != "n/a" && riscCodeEnabled == true) {
-		var gotItRight = false;
-		gotItRight = checkStatusCheckboxes();
-		if (gotItRight) {
-			rightAnswers++;
-		} else {
-			wrongAnswers++;
 		}
 	}
 	
