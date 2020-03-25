@@ -17,7 +17,7 @@ var checkCaps = false;
 var riscCodeEnabled = true;
 
 // Make an array to associate each field with the div id and true/false whether to check it
-var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true]/*,[4,"riscCode",true]*/];
+var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true],[4,"riscCode",true]];
 
 function loadTasks() {
 	var rawMammals = initializeFiles("ecologyListFull.csv");
@@ -154,35 +154,12 @@ function checkStatusCheckboxes() {
 			tempStatus = tempStatus + checkbox.value;
 		}
 	}
-	
-	if (thisMammal["riscCode"] == tempStatus) {
-		document.getElementById("riscCodeFeedback").innerHTML = "<img class='answerImg' src='img/yes.jpg' />";
-		return true;
-	} else {
-		document.getElementById("riscCodeFeedback").innerHTML = "<img class='answerImg' src='img/no.jpg' />";
-		return false;
-	}
 }
 
 // Show answers
 function showAnswers() {
 	for (i=0; i<mammalDivNames.length; i++) {
 		document.getElementById(mammalDivNames[i][1]).value = thisMammal[mammalDivNames[i][1]];
-	}
-	if (thisMammal["riscCode"].includes("yellow")) {
-		document.getElementById("riscCodeCheckbox1").checked = true;
-	} else {
-		document.getElementById("riscCodeCheckbox1").checked = false;
-	}
-	if (thisMammal["riscCode"].includes("blue")) {
-		document.getElementById("riscCodeCheckbox2").checked = true;
-	} else {
-		document.getElementById("riscCodeCheckbox2").checked = false;
-	}
-	if (thisMammal["riscCode"].includes("red")) {
-		document.getElementById("riscCodeCheckbox3").checked = true;
-	} else {
-		document.getElementById("riscCodeCheckbox3").checked = false;
 	}
 }
 
@@ -191,9 +168,6 @@ function hideAnswers() {
 	for (i=0; i<mammalDivNames.length; i++) {
 		document.getElementById(mammalDivNames[i][1]).value = "";
 	}
-	for (i=0; i<3; i++) {
-		document.getElementById("riscCodeCheckbox"+[i+1]).checked = false;
-	}
 }
 
 // Hide answer feedback image
@@ -201,7 +175,6 @@ function hideFeedbackImg() {
 	for (i=0; i<mammalDivNames.length; i++) {
 		document.getElementById(mammalDivNames[i][1] + "Feedback").innerHTML = "";
 	}
-	document.getElementById("riscCodeFeedback").innerHTML = "";
 }
 
 // Show options menu
@@ -232,12 +205,6 @@ function checkboxes() {
 		} else {
 			mammalDivNames[i][2] = false;
 		}
-	}
-	
-	if (document.getElementById("riscCodeCheckbox").checked == true) {
-		riscCodeEnabled = true;
-	} else {
-		riscCodeEnabled = false;
 	}
 }
 
@@ -271,20 +238,6 @@ function tidyInputs() {
 			break;
 		}
 	}
-	
-	if (thisMammal["riscCode"] == "n/a") {
-		document.getElementById("riscCodeAnswer").innerHTML = "n/a";
-		document.getElementById("riscCodeAnswer").style.display = "inline-block";
-		document.getElementById("riscCodeBoxes").style.display = "none";
-	} else if (riscCodeEnabled == false) {
-		document.getElementById("riscCodeAnswer").innerHTML = "disabled";
-		document.getElementById("riscCodeAnswer").style.display = "inline-block";
-		document.getElementById("riscCodeBoxes").style.display = "none";
-	} else {
-		somethingShowing = true;
-		document.getElementById("riscCodeBoxes").style.display = "inline-block";
-		document.getElementById("riscCodeAnswer").style.display = "none";
-	}
 	return somethingShowing;
 }
 
@@ -294,7 +247,6 @@ function setCookies() {
 		setCookie(mammalDivNames[i][1], mammalDivNames[i][2], 14);
 	}
 	setCookie("capitalization",checkCaps, 14);
-	setCookie("provStatus",riscCodeEnabled, 14);
 }
 
 // Set a cookie to remember quiz options
@@ -337,12 +289,6 @@ function checkForCookies() {
 		document.getElementById("capitalization").checked = true;
 	} else if (gotCookieCaps == "false") {
 		document.getElementById("capitalization").checked = false;
-	}
-	var gotCookiePS = getCookie("provStatus");
-	if (gotCookiePS == "true") {
-		document.getElementById("riscCodeCheckbox").checked = true;
-	} else if (gotCookiePS == "false") {
-		document.getElementById("riscCodeCheckbox").checked = false;
 	}
 }
 
@@ -423,13 +369,8 @@ function checkForCookies() {
 			<span id="speciesEpithetFeedback" class="inputFeedback"></span>
 		</span>
 		<span class="inputLine">
-			<span class="inputName">RISC Code:</span>
-			<span class="riscCodeBoxes inputText" id="riscCodeBoxes">
-				<label class="yellowBox psBox"><input type="checkbox" name="yellow" value="yellow" id="riscCodeCheckbox1"/>Yellow</label>
-				<label class="blueBox psBox"><input type="checkbox" name="blue" value="blue" id="riscCodeCheckbox2"/>Blue</label>
-				<label class="redBox psBox"><input type="checkbox" name="red" value="red" id="riscCodeCheckbox3"/>Red</label>
-			</span>
-			<!--<input class="inputText" id="riscCode" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>-->
+			<span class="inputName">RISC Name: </span>
+			<input class="inputText" id="riscCode" onkeypress="if (event.keyCode == 13) document.getElementById('checkAnswerButton').click()"/>
 			<span class="inputAnswer" id="riscCodeAnswer"></span>
 			<span id="riscCodeFeedback" class="inputFeedback"></span>
 		</span>
