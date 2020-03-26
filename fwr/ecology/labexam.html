@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../style.css">
 <link rel="stylesheet" type="text/css" href="labexamStyle.css">
 <link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
-<title>Mammals</title>
+<title>Ecology Lab Exam Practice</title>
 
 </head>
 
@@ -17,13 +17,13 @@ var questionOne;
 var questionTwo;
 var numRanges = 21;
 var checkCaps = false;
-var questionFields = [["commonName","Species (Common Name)"],["order","Order"],["family","Family"],["speciesEpithet","Species (Scientific Name)"],["provincialStatus","Provincial Status"],["range","Range"],["blue","Blue"],["red","Red"]];
+var questionFields = [["commonName","Species (Common Name)"],["order","Order"],["family","Family"],["speciesEpithet","Species (Scientific Name)"],["riscCode","Provincial Status"]];
 
 // Make an array to associate each field with the div id and true/false whether to check it
 var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true]];
 
 function loadTasks() {
-	var rawMammals = initializeFiles("mammalListFull.csv");
+	var rawMammals = initializeFiles("ecologyListFull.csv");
 	mammalList = setMammalVars(rawMammals);
 	setNewMammal();
 }
@@ -52,8 +52,7 @@ function setMammalVars(inputList) {
 			order: thisSpecies[1],
 			family: thisSpecies[2],
 			speciesEpithet: thisSpecies[3],
-			provincialStatus: thisSpecies[4],
-			range: thisSpecies[6],
+			riscCode: thisSpecies[4],
 			images: thisSpecies[5]
 		}
 		mammalList.push(newSpecies);
@@ -102,23 +101,7 @@ function pickQuestions(inputValue) {
 		if (newInt < 6) {
 			answer = thisMammal[questionFields[newInt][0]];
 		} 
-		// set up the question for other mammals with a particular provincial status
-		else if (newInt == 6) {
-			answer = "n/a";
-			for (i=0; i < mammalList.length; i++) {
-				if (mammalList[i].order == thisMammal.order && mammalList[i].provincialStatus.includes("blue")) {
-					answer = answer + ", " + mammalList[i].commonName;
-				}
-			}
-		} else if (newInt == 7) {
-			answer = "n/a";
-			for (i=0; i < mammalList.length; i++) {
-				if (mammalList[i].order == thisMammal.order && mammalList[i].provincialStatus.includes("red")) {
-					answer = answer + ", " + mammalList[i].commonName;
-					console.log(mammalList[i].provincialStatus + "   " + answer);
-				}
-			}
-		}
+		
 		questionReturn = [questionFields[newInt][0],questionFields[newInt][1],answer]
 		if (newInt < (questionFields.length - 1)) {
 			newInt++;
@@ -132,65 +115,9 @@ function pickQuestions(inputValue) {
 
 // Fill the divs with the random questions
 function askQuestions(divName,thisQuestion) {
-	// set up divs is the question is range
-	if (thisQuestion[0] == "range") {	
-		document.getElementById("question" + divName).innerHTML = 
-			"Which range best represents this specimen?<br />" +
-			"<span class='rangeBoxes' id='rangeBoxes'>" +
-			"<span class='rangeContainer'><input type='radio' name='range' value='range0' id='range0'/><span class='rangeBox' id='rangepic0' onclick='document.getElementById(&#39;range0&#39;).click()'></span></span>" +
-			"<span class='rangeContainer'><input type='radio' name='range' value='range1' id='range1'/><span class='rangeBox' id='rangepic1' onclick='document.getElementById(&#39;range1&#39;).click()'></span></span>" +
-			"<span class='rangeContainer'><input type='radio' name='range' value='range2' id='range2'/><span class='rangeBox' id='rangepic2' onclick='document.getElementById(&#39;range2&#39;).click()'></span></span></span>";
-		
-		var newInt = Math.floor(Math.random() * 3);
-		document.getElementById("rangepic" + newInt).innerHTML = "<img class='rangeImg' src='img/range/" + thisMammal.range + "' />";
-		document.getElementById("range" + newInt).value = thisMammal.range;
-		for (i=0; i<3; i++) {
-			if (i != newInt) {
-				var rangeInt = thisMammal.range;
-				while (rangeInt == thisMammal.range) {
-					rangeInt = Math.floor(Math.random() * numRanges) + 1;
-				}
-				document.getElementById("rangepic" + i).innerHTML = "<img class='rangeImg' src='img/range/" + rangeInt + "'/>";
-				document.getElementById("range" + i).value = rangeInt;
-			}
-		}
-	}
-	// set up divs is the question is provincial status
-	else if (thisQuestion[0] == "provincialStatus") {
-		document.getElementById("question" + divName).innerHTML = 
-			"What is the <b>Provincial Status</b> of this species (or subspecies)<br />" +
-			"<span class='provincialBoxes inputText' id='provincialBoxes'>" + 
-			"<label class='yellowBox psBox'><input type='checkbox' name='yellow' value='yellow' id='provincialCheckbox1'/>Yellow</label>" +
-			"<label class='blueBox psBox'><input type='checkbox' name='blue' value='blue' id='provincialCheckbox2'/>Blue</label>" +
-			"<label class='redBox psBox'><input type='checkbox' name='red' value='red' id='provincialCheckbox3'/>Red</label></span>";
-	} 
-	// set up divs is the question is other mammals in a particular provincial status
-	else if (thisQuestion[0] == "blue") {
-		document.getElementById("question" + divName).innerHTML = 
-			"Name a species (Common Name) in the same <b>Order</b> as this specimen that is <b>Blue Listed</b>, or has a Blue Listed subspecies.<br />" +
-			"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
-	}
-	else if (thisQuestion[0] == "red") {
-		document.getElementById("question" + divName).innerHTML = 
-			"Name a species (Common Name) in the same <b>Order</b> as this specimen that is <b>Red Listed</b>, or has a Red Listed subspecies.<br />" +
-			"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
-	}
-	// set up all other div types
-	else {
-		if (thisMammal.order == "Cetacea" && thisQuestion[0] == "speciesEpithet") {
-			document.getElementById("question" + divName).innerHTML = 
-			"Name the <b>Suborder</b> this specimen belongs to.<br />" +
-			"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
-		} else if (thisMammal.images.includes("damage")){
-			document.getElementById("question" + divName).innerHTML = 
-			"What is the <b>Common Name</b> of the animal that did this damage?<br />" +
-			"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
-		}else {
-			document.getElementById("question" + divName).innerHTML = 
-			"Name the <b>" + thisQuestion[1] + "</b> this specimen belongs to.<br />" +
-			"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
-		}
-	}
+	document.getElementById("question" + divName).innerHTML = 
+	"Name the <b>" + thisQuestion[1] + "</b> this specimen belongs to.<br />" +
+	"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
 }
 
 // Handle check answer button
@@ -211,50 +138,14 @@ function checkAnswers() {
 function checkTextAnswers(localDiv,localActual) {
 	var localEntered;
 	
-	// check provincial status
-	if (localActual[0] == "provincialStatus") {
-		var tempStatus = "";
-		for (i=0; i<3; i++) {
-			var checkbox = document.getElementById("provincialCheckbox"+[i+1]);
-			if (checkbox.checked == true) {
-				tempStatus = tempStatus + checkbox.value;
-			}
-		}
-		localEntered = tempStatus;
-	} 
-	// check range
-	else if (localActual[0] == "range") {
-		var radios = document.getElementsByName('range');
-		for (var i = 0; i < radios.length; i++) {
-			if (radios[i].type === 'radio' && radios[i].checked) {
-				// get value, set checked flag or do whatever you need to
-				localEntered = radios[i].value;       
-			}
-		}
-	}
 	// check text entered types
-	else {
-		localEntered = document.getElementById("answer" + localDiv).value
-		localEntered = localEntered.toLowerCase();
-		localActual[2] = localActual[2].toLowerCase();
-		localEntered = localEntered.replace("’","'");
-	}	
+	localEntered = document.getElementById("answer" + localDiv).value
+	localEntered = localEntered.toLowerCase();
+	localActual[2] = localActual[2].toLowerCase();
+	localEntered = localEntered.replace("’","'");
 	
 	// run the actual check
-	 
-	// check for other species of status
-	if (localActual[0] == "blue" || localActual[0] == "red") {
-		// set up the question for other mammals with a particular provincial status
-		
-		for (i=0; i < mammalList.length; i++) {
-			if (localEntered.toLowerCase() == mammalList[i].commonName.toLowerCase() && mammalList[i].order == thisMammal.order && mammalList[i].provincialStatus.includes(localActual[0])) {
-				document.getElementById("question" + localDiv).className = "question right";
-				return true;
-			}
-		}
-		document.getElementById("question" + localDiv).className = "question wrong";
-		return false;
-	} else if (localEntered == localActual[2]) {
+	if (localEntered == localActual[2]) {
 		document.getElementById("question" + localDiv).className = "question right";
 		return true;
 	} else {
@@ -273,32 +164,7 @@ function showAnswers() {
 
 // Show the answers in each box
 function showEachAnswer(localQuestion,localDiv) {
-	if (localQuestion[0] == "provincialStatus") {
-		if (localQuestion[2].includes("yellow")) {
-			document.getElementById("provincialCheckbox1").checked = true;
-		} else {
-			document.getElementById("provincialCheckbox1").checked = false;
-		}
-		if (localQuestion[2].includes("blue")) {
-			document.getElementById("provincialCheckbox2").checked = true;
-		} else {
-			document.getElementById("provincialCheckbox2").checked = false;
-		}
-		if (localQuestion[2].includes("red")) {
-			document.getElementById("provincialCheckbox3").checked = true;
-		} else {
-			document.getElementById("provincialCheckbox3").checked = false;
-		}
-	} else if (localQuestion[0] == "range") {
-		var radios = document.getElementsByName('range');
-		for (var i = 0; i < radios.length; i++) {
-			if (radios[i].value == thisMammal["range"]) {
-				radios[i].checked = true;
-			}
-		}
-	} else {
-		document.getElementById(localDiv).value = localQuestion[2];
-	}
+	document.getElementById(localDiv).value = localQuestion[2];
 }
 
 
