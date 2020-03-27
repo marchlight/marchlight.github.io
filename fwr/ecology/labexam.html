@@ -17,7 +17,7 @@ var questionOne;
 var questionTwo;
 var numRanges = 21;
 var checkCaps = false;
-var questionFields = [["commonName","Species (Common Name)"],["order","Order"],["family","Family"],["speciesEpithet","Species (Scientific Name)"],["riscCode","Provincial Status"]];
+var questionFields = [["commonName","Species (Common Name)"],["order","Order"],["family","Family"],["speciesEpithet","Species (Scientific Name)"],["riscCode","RISC Code"]];
 
 // Make an array to associate each field with the div id and true/false whether to check it
 var mammalDivNames = [[0,"commonName",true],[1,"spOrder",true],[2,"family",true],[3,"speciesEpithet",true]];
@@ -98,7 +98,7 @@ function pickQuestions(inputValue) {
 	// run the loop to get a value that isn't blank and is different from the inputvalue
 	// numTried maxes out the whileLoop so it doesn't run away
 	while (answer == inputValue || answer == "n/a" && numTried <= questionFields.length) {
-		if (newInt < 6) {
+		if (newInt < 5) {
 			answer = thisMammal[questionFields[newInt][0]];
 		} 
 		
@@ -115,9 +115,21 @@ function pickQuestions(inputValue) {
 
 // Fill the divs with the random questions
 function askQuestions(divName,thisQuestion) {
-	document.getElementById("question" + divName).innerHTML = 
-	"Name the <b>" + thisQuestion[1] + "</b> this specimen belongs to.<br />" +
-	"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
+	if (thisQuestion[0] == "riscCode") {
+		document.getElementById("question" + divName).innerHTML = 
+		"Give the RISC Code for this specimen.<br />" +
+		"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
+	} 
+	else if (thisQuestion[0] == "commonName" || thisQuestion[0] == "speciesEpithet") {
+		document.getElementById("question" + divName).innerHTML = 
+		"Give the <b>" + thisQuestion[1] + "</b> for this specimen.<br />" +
+		"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
+	}
+	else {
+		document.getElementById("question" + divName).innerHTML = 
+		"Name the <b>" + thisQuestion[1] + "</b> this specimen belongs to.<br />" +
+		"<input class='inputText' id='answer" + divName + "' onkeypress='if (event.keyCode == 13) document.getElementById(&#39;checkAnswerButton&#39;).click()'/>";
+	}
 }
 
 // Handle check answer button
