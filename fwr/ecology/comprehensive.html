@@ -74,6 +74,7 @@ function pickMammal(list) {
 function setNewMammal() {
 	hideAnswers();
 	hideFeedbackImg();
+	console.log(mammalList);
 	if (mammalList.length > 0) {
 		thisMammal = pickMammal(mammalList);
 		document.getElementById("picture").innerHTML = "<img class='picImage' src='img/" + thisMammal.images + "' />";
@@ -89,7 +90,7 @@ function setNewMammal() {
 	
 	// if this mammal has nothing available to test, skip to next one
 	var testable = tidyInputs();
-	if (!testable && mammalList.length > 1) {
+	if (!testable && mammalList.length >= 1) {
 		var ind = mammalList.indexOf(thisMammal);
 		mammalList.splice(ind,1);
 		setNewMammal();
