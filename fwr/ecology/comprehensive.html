@@ -74,7 +74,6 @@ function pickMammal(list) {
 function setNewMammal() {
 	hideAnswers();
 	hideFeedbackImg();
-	console.log(mammalList);
 	if (mammalList.length > 0) {
 		thisMammal = pickMammal(mammalList);
 		document.getElementById("picture").innerHTML = "<img class='picImage' src='img/" + thisMammal.images + "' />";
