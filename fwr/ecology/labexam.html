@@ -45,7 +45,7 @@ function initializeFiles(fileLoc) {
 
 // Put the mammal list into an array of objects
 function setMammalVars(inputList) {
-	for (var i = 0; i < inputList.length; i++) {
+	for (var i = 0; i < (inputList.length-1); i++) {
 		var thisSpecies = inputList[i].split(",")
 		var newSpecies = {
 			commonName: thisSpecies[0],
